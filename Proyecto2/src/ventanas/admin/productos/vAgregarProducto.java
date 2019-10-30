@@ -5,6 +5,8 @@
  */
 package ventanas.admin.productos;
 
+import clases.Producto;
+import clases.estructuras.Dato;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -45,14 +47,14 @@ public class vAgregarProducto extends javax.swing.JFrame {
         lAgregar = new javax.swing.JLabel();
         tNombre = new javax.swing.JTextField();
         tDescripcion = new javax.swing.JTextField();
-        tExistencia = new javax.swing.JTextField();
-        tBuscar = new javax.swing.JTextField();
+        tImagen = new javax.swing.JTextField();
         bBuscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         bCrear = new javax.swing.JButton();
         bCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         tPrecio = new javax.swing.JFormattedTextField();
+        tExistencia = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -76,18 +78,31 @@ public class vAgregarProducto extends javax.swing.JFrame {
         lAgregar.setText("Agregar productos");
 
         tNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificarString(evt);
+            }
+        });
 
         tDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificarString(evt);
+            }
+        });
 
-        tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        tBuscar.setBackground(new java.awt.Color(252, 249, 249));
-        tBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tBuscar.setDisabledTextColor(new java.awt.Color(252, 249, 249));
-        tBuscar.setEnabled(false);
-        tBuscar.addActionListener(new java.awt.event.ActionListener() {
+        tImagen.setBackground(new java.awt.Color(252, 249, 249));
+        tImagen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tImagen.setDisabledTextColor(new java.awt.Color(252, 249, 249));
+        tImagen.setEnabled(false);
+        tImagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tBuscarActionPerformed(evt);
+                tImagenActionPerformed(evt);
+            }
+        });
+        tImagen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificarDireccion(evt);
             }
         });
 
@@ -118,7 +133,15 @@ public class vAgregarProducto extends javax.swing.JFrame {
             }
         });
 
+        try {
+            tPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        tExistencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -139,13 +162,14 @@ public class vAgregarProducto extends javax.swing.JFrame {
                         .addComponent(lDescripcion)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tDescripcion)
-                            .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(tExistencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(tPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(tImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(tDescripcion)
+                                .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(bBuscar)
                 .addContainerGap())
@@ -180,18 +204,18 @@ public class vAgregarProducto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lPrecio)
                     .addComponent(tPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(23, 23, 23)
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lExistencia))
+                    .addComponent(lExistencia)
+                    .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lImagen)
                     .addComponent(bBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCrear)
                     .addComponent(bCancelar))
@@ -206,11 +230,11 @@ public class vAgregarProducto extends javax.swing.JFrame {
         imagen.showOpenDialog(this);
         File ruta = imagen.getSelectedFile();
         if(ruta!=null) try {
-            tBuscar.setText(ruta.getCanonicalPath());
+            tImagen.setText(ruta.getCanonicalPath());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error, dirección incorrecta");
         }
-        else tBuscar.setText(" ");
+        else tImagen.setText(" ");
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -220,14 +244,61 @@ public class vAgregarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
-        vProducto ventana = new vProducto();
-        ventana.setVisible(true);
-        this.dispose();
+        if("".equals(tNombre.getText())
+         ||"".equals(tDescripcion.getText())
+         ||"".equals(tExistencia.getText())
+         ||"".equals(tPrecio.getText())
+         ||"".equals(tImagen.getText())){
+            JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+        }else{
+            String nombre = tNombre.getText();
+            String descripcion = tDescripcion.getText();
+            String imagen = tImagen.getText();
+            float precio = Float.parseFloat(tPrecio.getText());
+            int existencia = Integer.parseInt(tExistencia.getText());
+            Producto nuevo = new Producto(nombre,descripcion,imagen,precio,existencia);
+            Dato datos = new Dato();
+            datos.getProductos().agregar(nuevo);
+            vProducto ventana = new vProducto();
+            ventana.setVisible(true);
+            this.dispose();         
+        } 
+        
+
     }//GEN-LAST:event_bCrearActionPerformed
 
-    private void tBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBuscarActionPerformed
+    private void tImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tImagenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tBuscarActionPerformed
+    }//GEN-LAST:event_tImagenActionPerformed
+
+    private void verificarString(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificarString
+      char caracter = evt.getKeyChar();
+
+      // Verificar dígitos
+      if((((int)caracter < 97) ||
+         ((int)caracter > 122)) &&
+         ((int)caracter != 32 )){
+           evt.consume();  // ignorar
+      }else{
+          
+      }
+    }//GEN-LAST:event_verificarString
+
+    private void verificarDireccion(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificarDireccion
+//      char caracter = evt.getKeyChar();
+//
+//      // Verificar dígitos
+//      if((((int)caracter < 97) ||
+//         ((int)caracter > 122)) &&
+//         ((int)caracter != 32 ) &&
+//         ((int)caracter != 47 ) &&
+//         ((int)caracter != 58 ) &&
+//         ((int)caracter != 92 ) ){
+//           evt.consume();  // ignorar
+//      }else{
+//          
+//      }
+    }//GEN-LAST:event_verificarDireccion
 
     /**
      * @param args the command line arguments
@@ -277,9 +348,9 @@ public class vAgregarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lImagen;
     private javax.swing.JLabel lNombre;
     private javax.swing.JLabel lPrecio;
-    private javax.swing.JTextField tBuscar;
     private javax.swing.JTextField tDescripcion;
-    private javax.swing.JTextField tExistencia;
+    private javax.swing.JFormattedTextField tExistencia;
+    private javax.swing.JTextField tImagen;
     private javax.swing.JTextField tNombre;
     private javax.swing.JFormattedTextField tPrecio;
     // End of variables declaration//GEN-END:variables

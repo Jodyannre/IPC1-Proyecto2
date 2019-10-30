@@ -5,7 +5,13 @@
  */
 package ventanas.admin;
 
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import clases.estructuras.ficheros.leerProducto;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import ventanas.admin.productos.vVerProducto;
 import ventanas.admin.productos.vAgregarProducto;
@@ -26,6 +32,8 @@ public class vProducto extends javax.swing.JFrame {
     public vProducto() {
         initComponents();
         setLocationRelativeTo(null);
+        Dato datos = new Dato();
+        datos.getProductos().mostrar();
     }
 
     /**
@@ -193,6 +201,10 @@ public class vProducto extends javax.swing.JFrame {
                     JFileChooser ingreso = new JFileChooser();
                     ingreso.showOpenDialog(this);
                     File ruta = ingreso.getSelectedFile();
+                    leerProducto leer = new leerProducto(ruta.toString());
+                    leer.leer();
+                    leer.asignar();                    
+
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible","Error",JOptionPane.ERROR_MESSAGE);                    
@@ -217,7 +229,29 @@ public class vProducto extends javax.swing.JFrame {
         switch (seleccion) {
             case 1:
                 try{
-                    seleccion = Integer.parseInt(JOptionPane.showInputDialog(null,"Ingrese el código del producto a eliminar"));
+                   String id = JOptionPane.showInputDialog(null,"Ingrese el código del producto a eliminar");
+
+        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el producto con ID: "+id, "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(opcion==0){
+            auxiliar = datos.getProductos().getPrimero(); 
+            producto = (Producto)auxiliar.getInfo();
+            int contador=0;
+            while(!producto.getId().equals(id)){
+                auxiliar=auxiliar.getSiguiente();
+                producto = (Producto)auxiliar.getInfo();
+                contador++;
+                if(contador>datos.getProductos().getTamaño()){
+                    break;
+                }
+            }
+            if(contador>datos.getProductos().getTamaño()){
+                JOptionPane.showMessageDialog(null, "Error, opción no disponible", "Error",JOptionPane.ERROR_MESSAGE,null);
+            }else{
+                datos.getProductos().eliminar(producto); 
+                JOptionPane.showMessageDialog(null, "Producto borrado con éxito", "Resultado",JOptionPane.INFORMATION_MESSAGE,null);
+            } 
+        }
+                    
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible", "Error",JOptionPane.ERROR_MESSAGE,null);
                 }
@@ -234,15 +268,40 @@ public class vProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void bMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMostrarActionPerformed
+                
         vVerProducto ventana = new vVerProducto();
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bMostrarActionPerformed
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
-        vModificarProducto ventana = new vModificarProducto();
-        ventana.setVisible(true);
-        this.dispose();        
+        String seleccion = JOptionPane.showInputDialog(null,"Ingrese el código del producto a modificar","Ingreso de datos",JOptionPane.QUESTION_MESSAGE);
+        boolean validar=false;
+        try{
+            auxiliar = datos.getProductos().getPrimero();
+            producto = (Producto)auxiliar.getInfo();
+            for(int i=0;i<datos.getProductos().getTamaño();i++){
+                if(producto.getId().equalsIgnoreCase(seleccion)){
+                    validar=true;
+                    break;
+                }
+                auxiliar=auxiliar.getSiguiente();
+                producto=(Producto)auxiliar.getInfo();
+            }            
+        }catch(Exception e){
+            
+        }
+
+        
+        if(validar){
+            vModificarProducto ventana = new vModificarProducto(producto);
+            ventana.setVisible(true);
+            this.dispose();  
+        }else{
+            JOptionPane.showMessageDialog(null, "Error, id inexistente", "Error en los datos", JOptionPane.ERROR_MESSAGE);
+        }
+        
+      
     }//GEN-LAST:event_bModificarActionPerformed
 
     /**
@@ -291,4 +350,8 @@ public class vProducto extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lProductos;
     // End of variables declaration//GEN-END:variables
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Producto producto = new Producto();
+        
 }

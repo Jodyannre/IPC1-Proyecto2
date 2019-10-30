@@ -5,6 +5,10 @@
  */
 package ventanas.admin.productos;
 
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import javax.swing.table.DefaultTableModel;
 import ventanas.admin.vProducto;
 import ventanas.vLogin;
 
@@ -19,6 +23,7 @@ public class vVerProducto extends javax.swing.JFrame {
      */
     public vVerProducto() {
         initComponents();
+        rellenarTabla();
         setLocationRelativeTo(null);
     }
 
@@ -33,7 +38,7 @@ public class vVerProducto extends javax.swing.JFrame {
 
         lDisponibles = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tProductos = new javax.swing.JTable();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
 
@@ -43,18 +48,15 @@ public class vVerProducto extends javax.swing.JFrame {
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Productos disponibles");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Id", "Existencia"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tProductos);
 
         bRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/regresar.png"))); // NOI18N
@@ -164,7 +166,26 @@ public class vVerProducto extends javax.swing.JFrame {
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lDisponibles;
+    private javax.swing.JTable tProductos;
     // End of variables declaration//GEN-END:variables
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Producto producto = new Producto();
+    
+    private void rellenarTabla(){
+        datos = new Dato();
+        DefaultTableModel modelo = (DefaultTableModel) tProductos.getModel();
+        Object fila[]= new Object[3];
+        auxiliar = datos.getProductos().getPrimero();        
+        for (int i=0; i<datos.getProductos().getTamaño();i++){
+                producto  = (Producto) auxiliar.getInfo();
+                fila[0]= producto.getNombre();
+                fila[1]= producto.getId();   
+                fila[2]= producto.getExistencia();
+                modelo.addRow(fila);
+                auxiliar=auxiliar.getSiguiente();                
+        }
+        tProductos.setModel(modelo);
+    }
 }

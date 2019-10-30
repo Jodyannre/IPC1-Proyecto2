@@ -5,8 +5,13 @@
  */
 package ventanas.admin.productos;
 
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import ventanas.admin.vProducto;
@@ -20,10 +25,17 @@ public class vModificarProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form vModificarProducto
+     * @param producto
      */
-    public vModificarProducto() {
-        initComponents();
+    public vModificarProducto(Producto producto) {
+        this.producto=producto;
+        initComponents(); 
+        rellenarInfo();        
         setLocationRelativeTo(null);
+    }
+
+    private vModificarProducto() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -43,16 +55,17 @@ public class vModificarProducto extends javax.swing.JFrame {
         lImagen = new javax.swing.JLabel();
         tNombre = new javax.swing.JTextField();
         tDescripcion = new javax.swing.JTextField();
-        tPrecio = new javax.swing.JTextField();
-        tExistencia = new javax.swing.JTextField();
-        tBuscar = new javax.swing.JTextField();
+        tImagen = new javax.swing.JTextField();
         bBuscar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         bGuardar = new javax.swing.JButton();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
-        cProductos = new javax.swing.JComboBox<>();
+        tExistencia = new javax.swing.JFormattedTextField();
+        tPrecio = new javax.swing.JFormattedTextField();
+        lNuevo = new javax.swing.JLabel();
+        tActual = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -67,7 +80,7 @@ public class vModificarProducto extends javax.swing.JFrame {
         lDescripcion.setText("Descripción: ");
 
         lPrecio.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lPrecio.setText("Precio: ");
+        lPrecio.setText("Precio actual: ");
 
         lExistencia.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lExistencia.setText("Existencia: ");
@@ -79,11 +92,8 @@ public class vModificarProducto extends javax.swing.JFrame {
 
         tDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        tBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tImagen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tImagen.setEnabled(false);
 
         bBuscar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/buscar.png"))); // NOI18N
@@ -121,64 +131,78 @@ public class vModificarProducto extends javax.swing.JFrame {
             }
         });
 
-        cProductos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        cProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tExistencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
+        tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        try {
+            tPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        lNuevo.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lNuevo.setText("Precio nuevo:");
+
+        tActual.setEditable(false);
+        tActual.setBackground(new java.awt.Color(255, 255, 255));
+        tActual.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lExistencia)
-                            .addComponent(lPrecio)
-                            .addComponent(lImagen))
-                        .addGap(27, 27, 27))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lNombre)
-                            .addComponent(lDescripcion))
-                        .addGap(18, 18, 18)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                        .addComponent(tDescripcion)
-                        .addComponent(tPrecio)
-                        .addComponent(tExistencia))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bBuscar)))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jSeparator1)
             .addComponent(jSeparator2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lModificar)
+                .addGap(129, 129, 129))
             .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(bGuardar)
+                .addGap(18, 18, 18)
+                .addComponent(bRegresar)
+                .addGap(18, 18, 18)
+                .addComponent(bSalir)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(83, 83, 83)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(bGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(bRegresar)
-                        .addGap(18, 18, 18)
-                        .addComponent(bSalir))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lPrecio)
+                            .addComponent(lDescripcion)
+                            .addComponent(lNombre))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(tNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                                .addComponent(tDescripcion, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(tActual, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lModificar)
-                        .addGap(61, 61, 61)
-                        .addComponent(cProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lExistencia)
+                            .addComponent(lImagen)
+                            .addComponent(lNuevo))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                                .addComponent(bBuscar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lModificar)
-                    .addComponent(cProductos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lModificar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,32 +215,41 @@ public class vModificarProducto extends javax.swing.JFrame {
                     .addComponent(lDescripcion))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lPrecio))
+                    .addComponent(lPrecio)
+                    .addComponent(tActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lExistencia))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lImagen))
+                    .addComponent(lNuevo)
+                    .addComponent(tPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lExistencia)
+                    .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lImagen)
                     .addComponent(bBuscar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bGuardar)
                     .addComponent(bRegresar)
                     .addComponent(bSalir))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        producto.setDescripcion(tDescripcion.getText());
+        producto.setExistencia((int)tExistencia.getValue());
+        producto.setImagen(tImagen.getText());
+        producto.setNombre(tNombre.getText());
+        producto.setPrecio(Float.parseFloat(tPrecio.getText()));      
+        datos.getProductos().buscar(producto).setInfo(producto);      
         vProducto ventana = new vProducto();
         ventana.setVisible(true);
         this.dispose();
@@ -239,11 +272,11 @@ public class vModificarProducto extends javax.swing.JFrame {
         imagen.showOpenDialog(this);
         File ruta = imagen.getSelectedFile();
         if(ruta!=null) try {
-            tBuscar.setText(ruta.getCanonicalPath());
+            tImagen.setText(ruta.getCanonicalPath());
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "Error, dirección incorrecta");
         }
-        else tBuscar.setText(" ");
+        else tImagen.setText(" ");
     }//GEN-LAST:event_bBuscarActionPerformed
 
     /**
@@ -286,7 +319,6 @@ public class vModificarProducto extends javax.swing.JFrame {
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
-    private javax.swing.JComboBox<String> cProductos;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lDescripcion;
@@ -294,11 +326,29 @@ public class vModificarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lImagen;
     private javax.swing.JLabel lModificar;
     private javax.swing.JLabel lNombre;
+    private javax.swing.JLabel lNuevo;
     private javax.swing.JLabel lPrecio;
-    private javax.swing.JTextField tBuscar;
+    private javax.swing.JTextField tActual;
     private javax.swing.JTextField tDescripcion;
-    private javax.swing.JTextField tExistencia;
+    private javax.swing.JFormattedTextField tExistencia;
+    private javax.swing.JTextField tImagen;
     private javax.swing.JTextField tNombre;
-    private javax.swing.JTextField tPrecio;
+    private javax.swing.JFormattedTextField tPrecio;
     // End of variables declaration//GEN-END:variables
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Producto producto = new Producto();
+    
+    private void rellenarInfo(){  
+        try{
+            tNombre.setText(producto.getNombre());
+            tDescripcion.setText(producto.getDescripcion());
+            tImagen.setText(producto.getImagen());
+            tActual.setText(String.valueOf(producto.getPrecio()));
+            tExistencia.setValue(producto.getExistencia());            
+        }catch(Exception e){
+            
+        }
+
+    }
 }

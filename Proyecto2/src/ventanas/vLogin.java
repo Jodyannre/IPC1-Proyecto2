@@ -5,7 +5,9 @@
  */
 package ventanas;
 
+import clases.estructuras.Dato;
 import ventanas.admin.vAdmin;
+
 
 /**
  *
@@ -19,6 +21,8 @@ public class vLogin extends javax.swing.JFrame {
     public vLogin() {
         initComponents();
         setLocationRelativeTo(null);
+        Dato datos = new Dato();
+        datos.getUsuarios().mostrar();
     }
 
     /**
@@ -160,6 +164,9 @@ public class vLogin extends javax.swing.JFrame {
         vAdmin ventana = new vAdmin();
         ventana.setVisible(true);
         this.dispose();
+//        vInicio ventana = new vInicio();
+//        ventana.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_bIngresarActionPerformed
 
     private void jCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearActionPerformed
@@ -205,7 +212,7 @@ public class vLogin extends javax.swing.JFrame {
             public void run() {
                 new vLogin().setVisible(true);                
             }
-        });
+        });      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

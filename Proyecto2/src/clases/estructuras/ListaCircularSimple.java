@@ -25,13 +25,13 @@ public class ListaCircularSimple {
     public void agregar(Object info){
         Nodo nuevo = new Nodo();
         nuevo.setInfo(info);
-        if(primero==null){
+        if(getPrimero()==null){
             primero=nuevo;
-            ultimo=primero;
-            primero.setSiguiente(ultimo);
+            ultimo=getPrimero();
+            getPrimero().setSiguiente(getUltimo());
         }else{
-            ultimo.setSiguiente(nuevo);
-            nuevo.setSiguiente(primero);
+            getUltimo().setSiguiente(nuevo);
+            nuevo.setSiguiente(getPrimero());
             ultimo = nuevo;
         }
         tamaño++;
@@ -41,11 +41,16 @@ public class ListaCircularSimple {
     * Imprime la información dentro de todos los nodos
     */    
     public void mostrar(){
-        Nodo auxiliar= primero;
-        do{
-           System.out.println(auxiliar.getInfo().toString());
-           auxiliar = auxiliar.getSiguiente();
-        }while(auxiliar!=primero);
+        Nodo auxiliar= getPrimero();
+        if(getPrimero()!=null){
+            do{
+               System.out.println(auxiliar.getInfo().toString());
+               auxiliar = auxiliar.getSiguiente();
+            }while(auxiliar!=getPrimero());            
+        }else{
+            System.out.println("No existe información");
+        }
+
     }
 
     /**
@@ -54,19 +59,23 @@ public class ListaCircularSimple {
      * @return el nodo buscado
     */    
     public Nodo buscar(Object info){
-        Nodo auxiliar = primero;
+        Nodo auxiliar = getPrimero();
         Nodo vacio = new Nodo();
         vacio.setInfo("Valor inexistente");
         
         boolean encontrado=false;
-        do{
-            if(auxiliar.getInfo()==info){
-                encontrado=true;
-                break;
-            }
-            
-           auxiliar = auxiliar.getSiguiente();
-        }while(auxiliar!=primero); 
+        if(getPrimero()!=null){
+            do{
+                if(auxiliar.getInfo()==info){
+                    encontrado=true;
+                    break;
+                }
+
+               auxiliar = auxiliar.getSiguiente();
+            }while(auxiliar!=getPrimero());             
+        }else{
+            System.out.println("No existe información");
+        }
         
         if(!encontrado)return vacio;
         else return auxiliar;
@@ -79,7 +88,7 @@ public class ListaCircularSimple {
      * @param nueva la nueva información que tendrá el nodo
     */    
     public void modificar(Object info, Object nueva){
-        Nodo auxiliar = primero;
+        Nodo auxiliar = getPrimero();
         
         do{
             if(auxiliar.getInfo()==info){
@@ -88,7 +97,7 @@ public class ListaCircularSimple {
             }
             auxiliar = auxiliar.getSiguiente();
             
-        }while(auxiliar!=primero);       
+        }while(auxiliar!=getPrimero());       
     }
     
     /**
@@ -98,16 +107,20 @@ public class ListaCircularSimple {
     */
     public boolean existe(Object info){
         
-        Nodo auxiliar = primero;
+        Nodo auxiliar = getPrimero();
         boolean existe=false;
-        do{
-            if(auxiliar.getInfo()==info){
-                existe=true;
-                break;
-            }
-            auxiliar = auxiliar.getSiguiente();
-            
-        }while(auxiliar!=primero);         
+        if(getPrimero()!=null){
+            do{
+                if(auxiliar.getInfo()==info){
+                    existe=true;
+                    break;
+                }
+                auxiliar = auxiliar.getSiguiente();
+
+            }while(auxiliar!=getPrimero());             
+        } else{
+            System.out.println("No existe información");
+        }        
         return existe;
     }
     
@@ -117,30 +130,34 @@ public class ListaCircularSimple {
      * @return un booleano que determina si la lista esta vacia
     */    
     public boolean estaVacia(){
-        return primero==null;
+        return getPrimero()==null;
     }
     
     public void eliminar(Object info){
-        Nodo auxiliar = primero;
-        Nodo anterior = ultimo;
+        Nodo auxiliar = getPrimero();
+        Nodo anterior = getUltimo();
         
-        do{
-            if(auxiliar.getInfo()==info){   
-                if(auxiliar==primero){
-                    primero = primero.getSiguiente();
-                    anterior.setSiguiente(primero);
-                }else if(auxiliar == ultimo){
-                    anterior.setSiguiente(ultimo.getSiguiente());
-                    ultimo = anterior;
-                }else{
-                    anterior.setSiguiente(auxiliar.getSiguiente());
+        if(getPrimero()!=null){
+            do{
+                if(auxiliar.getInfo()==info){   
+                    if(auxiliar==getPrimero()){
+                        primero = getPrimero().getSiguiente();
+                        anterior.setSiguiente(getPrimero());
+                    }else if(auxiliar == getUltimo()){
+                        anterior.setSiguiente(getUltimo().getSiguiente());
+                        ultimo = anterior;
+                    }else{
+                        anterior.setSiguiente(auxiliar.getSiguiente());
+                    }
+                    tamaño--;
                 }
-                tamaño--;
-            }
-           anterior = auxiliar; 
-           auxiliar = auxiliar.getSiguiente();
+               anterior = auxiliar; 
+               auxiliar = auxiliar.getSiguiente();
 
-        }while(auxiliar!=primero);
+            }while(auxiliar!=getPrimero());            
+        }else{
+            System.out.println("No existe información");
+        }
         
     }
 
@@ -149,6 +166,20 @@ public class ListaCircularSimple {
      */
     public int getTamaño() {
         return tamaño;
+    }
+
+    /**
+     * @return the primero
+     */
+    public Nodo getPrimero() {
+        return primero;
+    }
+
+    /**
+     * @return the ultimo
+     */
+    public Nodo getUltimo() {
+        return ultimo;
     }
     
 }

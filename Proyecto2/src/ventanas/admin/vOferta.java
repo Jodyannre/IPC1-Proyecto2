@@ -78,7 +78,7 @@ public class vOferta extends javax.swing.JFrame {
         });
 
         bRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        bRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/ingresar.png"))); // NOI18N
+        bRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/regresar.png"))); // NOI18N
         bRegresar.setText("Regresar");
         bRegresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

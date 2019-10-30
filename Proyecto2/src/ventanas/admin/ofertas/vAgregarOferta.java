@@ -41,8 +41,8 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lPrioridad = new javax.swing.JLabel();
         tPrecio = new javax.swing.JFormattedTextField();
         lAgregar = new javax.swing.JLabel();
-        tDescripcion = new javax.swing.JTextField();
         cProductos = new javax.swing.JComboBox<>();
+        tDescripcion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -50,10 +50,14 @@ public class vAgregarOferta extends javax.swing.JFrame {
         tBuscar.setBackground(new java.awt.Color(252, 249, 249));
         tBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tBuscar.setDisabledTextColor(new java.awt.Color(252, 249, 249));
-        tBuscar.setEnabled(false);
         tBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tBuscarActionPerformed(evt);
+            }
+        });
+        tBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificarString(evt);
             }
         });
 
@@ -87,15 +91,30 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lPrioridad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lPrioridad.setText("Prioridad: ");
 
+        try {
+            tPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tPrecio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tPrecioActionPerformed(evt);
+            }
+        });
 
         lAgregar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lAgregar.setText("Agregar ofertas");
 
-        tDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         cProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        tDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                verificarString(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -122,7 +141,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(tPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                                     .addComponent(tBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(tDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)))
+                                    .addComponent(tDescripcion)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lProductos)
                                 .addGap(27, 27, 27)
@@ -140,8 +159,8 @@ public class vAgregarOferta extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lDescripcion))
+                    .addComponent(lDescripcion)
+                    .addComponent(tDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lDescuento)
@@ -181,6 +200,26 @@ public class vAgregarOferta extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bCancelarActionPerformed
+
+    private void tPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPrecioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tPrecioActionPerformed
+
+    private void verificarString(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificarString
+      char caracter = evt.getKeyChar();
+
+      // Verificar dígitos
+      if((((int)caracter < 97) ||
+         ((int)caracter > 122)) &&
+         ((int)caracter != 32 )){
+           evt.consume();  // ignorar
+      }else{
+          
+      }
+          
+      
+                
+    }//GEN-LAST:event_verificarString
 
     /**
      * @param args the command line arguments

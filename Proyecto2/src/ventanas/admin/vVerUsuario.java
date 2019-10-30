@@ -5,6 +5,10 @@
  */
 package ventanas.admin;
 
+import clases.Cliente;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import javax.swing.table.DefaultTableModel;
 import ventanas.vLogin;
 
 /**
@@ -18,6 +22,7 @@ public class vVerUsuario extends javax.swing.JFrame {
      */
     public vVerUsuario() {
         initComponents();
+        rellenarTabla();
         setLocationRelativeTo(null);
     }
 
@@ -44,14 +49,20 @@ public class vVerUsuario extends javax.swing.JFrame {
 
         tUsuarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Usuario", "Dato 1", "Dato 2"
+                "Usuario", "Tipo", "Compras"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         sUsuarios.setViewportView(tUsuarios);
 
         bRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -165,4 +176,26 @@ public class vVerUsuario extends javax.swing.JFrame {
     private javax.swing.JScrollPane sUsuarios;
     private javax.swing.JTable tUsuarios;
     // End of variables declaration//GEN-END:variables
+    
+    private void rellenarTabla(){
+        Dato datos = new Dato();
+        DefaultTableModel modelo = (DefaultTableModel) tUsuarios.getModel();
+        Object fila[]= new Object[3];
+        Nodo auxiliar = datos.getUsuarios().getCabeza();        
+        for (int i=0; i<datos.getUsuarios().getTamaño();i++){
+
+                Cliente cliente = (Cliente) auxiliar.getInfo();
+                fila[0]= cliente.getNombreU();
+                if(cliente.isTipoC()){
+                    fila[1]= "Frecuente";
+                }else{
+                    fila[1]= "Normal";
+                }                
+                fila[2]= cliente.getContadorCompras();
+                modelo.addRow(fila);
+                auxiliar=auxiliar.getSiguiente();                
+
+        }
+        tUsuarios.setModel(modelo);
+    }
 }

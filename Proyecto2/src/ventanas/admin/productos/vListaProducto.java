@@ -5,7 +5,11 @@
  */
 package ventanas.admin.productos;
 
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import ventanas.admin.vProducto;
 import ventanas.vLogin;
 
@@ -20,6 +24,7 @@ public class vListaProducto extends javax.swing.JFrame {
      */
     public vListaProducto() {
         initComponents();
+        rellenarTabla();
         setLocationRelativeTo(null);
     }
 
@@ -34,7 +39,7 @@ public class vListaProducto extends javax.swing.JFrame {
 
         lDisponibles = new javax.swing.JLabel();
         pDisponibles = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tProductos = new javax.swing.JTable();
         bEliminar = new javax.swing.JButton();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
@@ -45,18 +50,16 @@ public class vListaProducto extends javax.swing.JFrame {
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Productos disponibles");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nombre", "Id", "Existencia"
             }
         ));
-        pDisponibles.setViewportView(jTable1);
+        tProductos.setEnabled(false);
+        pDisponibles.setViewportView(tProductos);
 
         bEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/eliminar.png"))); // NOI18N
@@ -137,8 +140,22 @@ public class vListaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el product: ", "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-
+        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el product: ", "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        if(opcion==0){
+            int fila = tProductos.getSelectedRow();
+            String seleccion=tProductos.getValueAt(fila, 1).toString();
+            auxiliar = datos.getProductos().getPrimero(); 
+            producto = (Producto)auxiliar.getInfo();
+            while(!producto.getId().equals(seleccion)){
+                auxiliar=auxiliar.getSiguiente();
+                producto = (Producto)auxiliar.getInfo();
+            }
+            datos.getProductos().eliminar(producto);
+            JOptionPane.showMessageDialog(null, "Producto borrado con éxito", "Resultado",JOptionPane.INFORMATION_MESSAGE,null);
+            vProducto nuevo = new vProducto();
+            nuevo.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_bEliminarActionPerformed
 
     /**
@@ -181,8 +198,27 @@ public class vListaProducto extends javax.swing.JFrame {
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lDisponibles;
     private javax.swing.JScrollPane pDisponibles;
+    private javax.swing.JTable tProductos;
     // End of variables declaration//GEN-END:variables
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Producto producto = new Producto();
+    
+    private void rellenarTabla(){
+        datos = new Dato();
+        DefaultTableModel modelo = (DefaultTableModel) tProductos.getModel();
+        Object fila[]= new Object[3];
+        auxiliar = datos.getProductos().getPrimero();        
+        for (int i=0; i<datos.getProductos().getTamaño();i++){
+                producto  = (Producto) auxiliar.getInfo();
+                fila[0]= producto.getNombre();
+                fila[1]= producto.getId();   
+                fila[2]= producto.getExistencia();
+                modelo.addRow(fila);
+                auxiliar=auxiliar.getSiguiente();                
+        }
+        tProductos.setModel(modelo);
+    }
 }

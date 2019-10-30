@@ -5,6 +5,10 @@
  */
 package ventanas;
 
+import clases.Cliente;
+import clases.estructuras.Dato;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Jo
@@ -180,9 +184,22 @@ public class vNuevo extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
-        vLogin ventana = new vLogin();
-        ventana.setVisible(true);
-        this.dispose();
+        if("".equals(tUsuario.getText()) || "".equals(String.valueOf(tContraseña.getPassword()))
+         ||"".equals(tNombre.getText())||"".equals(tCorreo.getText())||"".equals(tTarjeta.getText())){
+            JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+        }else{
+            String usuario = tUsuario.getText();
+            String nombre = tNombre.getText();
+            String correo = tCorreo.getText();
+            char pass[] = tContraseña.getPassword();
+            String tarjeta = tTarjeta.getText();
+            Cliente nuevo = new Cliente(usuario,pass,nombre,correo,tarjeta);
+            Dato datos = new Dato();
+            datos.getUsuarios().agregar(nuevo);
+            vLogin ventana = new vLogin();
+            ventana.setVisible(true);
+            this.dispose();            
+        }     
     }//GEN-LAST:event_bCrearActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
