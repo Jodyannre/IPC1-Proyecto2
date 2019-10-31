@@ -126,9 +126,13 @@ public class leerProducto{
         try{
             System.out.print("\n");
             System.out.print(nombre);
+            System.out.print("\n");
             System.out.print(descripcion);
+            System.out.print("\n");
             System.out.print(precio);
+            System.out.print("\n");
             System.out.print(existencia);
+            System.out.print("\n");
             System.out.print(direccion);            
         }catch(Exception e){
             

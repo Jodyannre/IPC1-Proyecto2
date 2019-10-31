@@ -6,6 +6,7 @@
 package ventanas;
 
 import clases.estructuras.Dato;
+import java.io.File;
 import ventanas.admin.vAdmin;
 
 
@@ -23,6 +24,7 @@ public class vLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         Dato datos = new Dato();
         datos.getUsuarios().mostrar();
+        System.out.println(new File("C:\\Users\\Jo\\Desktop\\Proyecto\\carro.jpg").exists());
     }
 
     /**

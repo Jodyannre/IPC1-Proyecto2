@@ -8,6 +8,12 @@ package ventanas.admin.productos;
 import clases.Producto;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
+import java.awt.Image;
+import java.net.URL;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ventanas.admin.vProducto;
 import ventanas.vLogin;
@@ -41,6 +47,7 @@ public class vVerProducto extends javax.swing.JFrame {
         tProductos = new javax.swing.JTable();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
+        bDetalle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -76,6 +83,15 @@ public class vVerProducto extends javax.swing.JFrame {
             }
         });
 
+        bDetalle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/mostrar.png"))); // NOI18N
+        bDetalle.setText("Ver detalle");
+        bDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDetalleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,7 +107,9 @@ public class vVerProducto extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
+                .addGap(58, 58, 58)
+                .addComponent(bDetalle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bRegresar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bSalir)
@@ -107,7 +125,8 @@ public class vVerProducto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bRegresar)
-                    .addComponent(bSalir))
+                    .addComponent(bSalir)
+                    .addComponent(bDetalle))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -125,6 +144,29 @@ public class vVerProducto extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void bDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDetalleActionPerformed
+        try{
+            int fila = tProductos.getSelectedRow();
+            String seleccion=tProductos.getValueAt(fila, 1).toString();
+            auxiliar = datos.getProductos().getPrimero(); 
+            producto = (Producto)auxiliar.getInfo();
+            while(!producto.getId().equals(seleccion)){
+                auxiliar=auxiliar.getSiguiente();
+                producto = (Producto)auxiliar.getInfo();
+            }
+            ImageIcon icono = new ImageIcon(producto.getImagen());
+            JOptionPane.showMessageDialog(null, 
+                    "Nombre: "+producto.getNombre()+"\n"
+                    +"Descripción: "+producto.getDescripcion()+"\n"
+                    +"Precio: Q."+producto.getPrecio()+"\n"
+                    +"Existencia: "+producto.getExistencia(),"Detalle",JOptionPane.INFORMATION_MESSAGE,icono);            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No hay información para mostrar","Error",JOptionPane.ERROR_MESSAGE);
+        }
+
+
+    }//GEN-LAST:event_bDetalleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,6 +205,7 @@ public class vVerProducto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDetalle;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
     private javax.swing.JScrollPane jScrollPane1;

@@ -12,7 +12,7 @@ public class ColaPrioridad {
         fin = null;
     }
     public boolean estaVacia(){
-        return inicio==null;
+        return getInicio()==null;
     }
     
     //Prioridades
@@ -23,10 +23,10 @@ public class ColaPrioridad {
             inicio=nuevo;
             fin = nuevo;
         }else if(!prioridad){
-            fin.setSiguiente(nuevo);
+            getFin().setSiguiente(nuevo);
             fin=nuevo;
         }else{
-            nuevo.setSiguiente(inicio);
+            nuevo.setSiguiente(getInicio());
             inicio=nuevo;
             
         }        
@@ -34,10 +34,10 @@ public class ColaPrioridad {
     }    
   
     
-    public Object sacarCola(){
-        if(inicio!=null){
-            Object auxiliar = inicio.getInfo();
-            inicio = inicio.getSiguiente();
+    public Nodo sacarCola(){
+        if(getInicio()!=null){
+            Nodo auxiliar = getInicio();
+            inicio = getInicio().getSiguiente();
             tamaño--;
             return auxiliar;            
         }else{
@@ -48,7 +48,7 @@ public class ColaPrioridad {
     }
     
     public void mostrarCola(){
-        Nodo auxiliar = inicio;
+        Nodo auxiliar = getInicio();
         while(auxiliar!=null){
             System.out.println(auxiliar.getInfo().toString());
             auxiliar=auxiliar.getSiguiente();    
@@ -56,18 +56,18 @@ public class ColaPrioridad {
     }
     
     public Object inicio(){
-        return inicio.getInfo();
+        return getInicio().getInfo();
     }
     
     public int tamaño(){
-        return tamaño;
+        return getTamaño();
     }
     
     public boolean existe(Object info){
-        Nodo auxiliar=inicio;
+        Nodo auxiliar=getInicio();
         boolean encontrado = false;
         
-        if(inicio!=null){
+        if(getInicio()!=null){
             while(auxiliar!=null){
                 if(auxiliar.getInfo()==info){
                     encontrado=true;
@@ -82,19 +82,19 @@ public class ColaPrioridad {
     }
     
     public void eliminar(Object info){
-        Nodo auxiliar=inicio;
+        Nodo auxiliar=getInicio();
         Nodo anterior=null;
-        if(inicio!=null){
+        if(getInicio()!=null){
             while(auxiliar!=null){
                 if(auxiliar.getInfo()==info){
-                    if(auxiliar ==inicio && auxiliar==fin){
+                    if(auxiliar ==getInicio() && auxiliar==getFin()){
                         inicio = auxiliar.getSiguiente();
                         fin = auxiliar.getSiguiente();                        
-                    }else if(auxiliar==inicio){
+                    }else if(auxiliar==getInicio()){
                         inicio = auxiliar.getSiguiente();
-                    }else if(auxiliar==fin){
+                    }else if(auxiliar==getFin()){
                         fin = anterior;
-                        fin.setSiguiente(null);                        
+                        getFin().setSiguiente(null);                        
                     }else{
                         
                     }
@@ -106,6 +106,34 @@ public class ColaPrioridad {
             }
         } 
         
+    }
+
+    /**
+     * @return the inicio
+     */
+    public Nodo getInicio() {
+        return inicio;
+    }
+
+    /**
+     * @return the fin
+     */
+    public Nodo getFin() {
+        return fin;
+    }
+
+    /**
+     * @return the tamaño
+     */
+    public int getTamaño() {
+        return tamaño;
+    }
+
+    /**
+     * @return the prioridad
+     */
+    public int getPrioridad() {
+        return prioridad;
     }
     
 }

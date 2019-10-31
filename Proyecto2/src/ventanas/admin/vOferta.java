@@ -5,6 +5,7 @@
  */
 package ventanas.admin;
 
+import clases.estructuras.ficheros.leerOferta;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -177,6 +178,9 @@ public class vOferta extends javax.swing.JFrame {
                     JFileChooser ingreso = new JFileChooser();
                     ingreso.showOpenDialog(this);
                     File ruta = ingreso.getSelectedFile();
+                    leerOferta leer = new leerOferta(ruta.toString());
+                    leer.leer();
+                    leer.asignar();                    
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible","Error",JOptionPane.ERROR_MESSAGE);                    

@@ -4,7 +4,7 @@ package clases;
 
 public class Producto {
     private String id, nombre, descripcion, imagen;
-    private float precio, descuento;
+    private float precio, precioAnterior;
     private int existencia;
     private boolean prioridad;
     private static int contador;
@@ -16,7 +16,7 @@ public class Producto {
         this.imagen=imagen;
         this.precio=precio;
         this.existencia=existencia;
-        descuento=0;
+        precioAnterior=precio;
         prioridad=false;        
     }
     public Producto(){
@@ -95,15 +95,15 @@ public class Producto {
     /**
      * @return the descuento
      */
-    public float getDescuento() {
-        return descuento;
+    public float getPrecioAnterior() {
+        return precioAnterior;
     }
 
     /**
      * @param descuento the descuento to set
      */
-    public void setDescuento(float descuento) {
-        this.descuento = descuento;
+    public void setPrecioAnterior(float descuento) {
+        this.precioAnterior = descuento;
     }
 
     /**

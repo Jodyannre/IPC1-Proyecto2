@@ -5,6 +5,11 @@
  */
 package ventanas.admin.ofertas;
 
+import clases.Oferta;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import ventanas.admin.vOferta;
 import ventanas.vLogin;
 
@@ -19,6 +24,7 @@ public class vVerOferta extends javax.swing.JFrame {
      */
     public vVerOferta() {
         initComponents();
+        rellenarTabla();
         setLocationRelativeTo(null);        
     }
 
@@ -32,26 +38,24 @@ public class vVerOferta extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tOfertas = new javax.swing.JTable();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
         lDisponibles = new javax.swing.JLabel();
+        bDetalle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tOfertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Descuento", "Prioridad"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tOfertas);
 
         bRegresar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/regresar.png"))); // NOI18N
@@ -74,6 +78,15 @@ public class vVerOferta extends javax.swing.JFrame {
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Ofertas disponibles");
 
+        bDetalle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/mostrar.png"))); // NOI18N
+        bDetalle.setText("Ver detalle");
+        bDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDetalleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,17 +97,18 @@ public class vVerOferta extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(141, 141, 141)
-                                .addComponent(bRegresar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bSalir))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(142, 142, 142)
-                                .addComponent(lDisponibles)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(142, 142, 142)
+                        .addComponent(lDisponibles)
+                        .addGap(0, 160, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(76, 76, 76)
+                .addComponent(bDetalle)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bRegresar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(bSalir)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +120,8 @@ public class vVerOferta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bRegresar)
-                    .addComponent(bSalir))
+                    .addComponent(bSalir)
+                    .addComponent(bDetalle))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -124,6 +139,27 @@ public class vVerOferta extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void bDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDetalleActionPerformed
+        try{
+            int fila = tOfertas.getSelectedRow();
+            String seleccion=tOfertas.getValueAt(fila, 0).toString();
+            auxiliar = datos.getOfertas().getInicio();
+            oferta = (Oferta)auxiliar.getInfo();
+            while(!oferta.getId().equals(seleccion)){
+                auxiliar=auxiliar.getSiguiente();
+                oferta = (Oferta)auxiliar.getInfo();
+            }
+            JOptionPane.showMessageDialog(null,
+                "Id: "+oferta.getId()+"\n"
+                +"Descripción: "+oferta.getDescripcion()+"\n"
+                +"Descuento: "+oferta.getDescuento()+"%"+"\n"
+                +"Productos: "+oferta.getProductos().mostrar(),"Detalle",JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No hay información para mostrar","Error",JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_bDetalleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,10 +197,34 @@ public class vVerOferta extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDetalle;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lDisponibles;
+    private javax.swing.JTable tOfertas;
     // End of variables declaration//GEN-END:variables
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Oferta oferta = new Oferta();
+    
+    private void rellenarTabla(){
+        datos = new Dato();
+        DefaultTableModel modelo = (DefaultTableModel) tOfertas.getModel();
+        Object fila[]= new Object[3];
+        auxiliar = datos.getOfertas().getInicio();
+        for (int i=0; i<datos.getOfertas().getTamaño();i++){
+                oferta  = (Oferta) auxiliar.getInfo();
+                fila[0]= oferta.getId();
+                fila[1]= oferta.getDescuento();
+                if(oferta.isPrioridad()){
+                    fila[2]= "Alta";
+                }else{
+                    fila[2]= "Baja";
+                }
+                modelo.addRow(fila);
+                auxiliar=auxiliar.getSiguiente();                
+        }
+        tOfertas.setModel(modelo);
+    }    
 }

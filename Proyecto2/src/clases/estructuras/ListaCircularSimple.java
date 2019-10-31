@@ -5,6 +5,7 @@
  */
 package clases.estructuras;
 
+import clases.Producto;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,18 +40,23 @@ public class ListaCircularSimple {
 
     /**
     * Imprime la información dentro de todos los nodos
+     * @return 
     */    
-    public void mostrar(){
+    public String mostrar(){
         Nodo auxiliar= getPrimero();
+        Producto producto = new Producto();
+        String p="";
         if(getPrimero()!=null){
             do{
                System.out.println(auxiliar.getInfo().toString());
+               producto = (Producto)auxiliar.getInfo();
+               p = p+producto.getNombre()+",";
                auxiliar = auxiliar.getSiguiente();
             }while(auxiliar!=getPrimero());            
         }else{
             System.out.println("No existe información");
         }
-
+        return p;
     }
 
     /**

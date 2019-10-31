@@ -8,6 +8,8 @@ package ventanas.admin;
 import clases.Cliente;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ventanas.vLogin;
 
@@ -40,6 +42,7 @@ public class vVerUsuario extends javax.swing.JFrame {
         tUsuarios = new javax.swing.JTable();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
+        bDetalle = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -83,6 +86,15 @@ public class vVerUsuario extends javax.swing.JFrame {
             }
         });
 
+        bDetalle.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        bDetalle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/mostrar.png"))); // NOI18N
+        bDetalle.setText("Ver detalle");
+        bDetalle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bDetalleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,16 +105,19 @@ public class vVerUsuario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(sUsuarios, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(111, 111, 111)
-                        .addComponent(bRegresar)
-                        .addGap(69, 69, 69)
-                        .addComponent(bSalir)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(211, 211, 211)
+                                .addComponent(lUsuarios))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(bDetalle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bRegresar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bSalir)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(211, 211, 211)
-                .addComponent(lUsuarios)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,7 +129,8 @@ public class vVerUsuario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bRegresar)
-                    .addComponent(bSalir))
+                    .addComponent(bSalir)
+                    .addComponent(bDetalle))
                 .addGap(28, 28, 28))
         );
 
@@ -132,6 +148,26 @@ public class vVerUsuario extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void bDetalleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDetalleActionPerformed
+        try{
+            int fila = tUsuarios.getSelectedRow();
+            String seleccion=tUsuarios.getValueAt(fila, 0).toString();
+            auxiliar = datos.getUsuarios().getCabeza(); 
+            cliente = (Cliente)auxiliar.getInfo();
+            while(!cliente.getNombreU().equals(seleccion)){
+                auxiliar=auxiliar.getSiguiente();
+                cliente = (Cliente)auxiliar.getInfo();
+            }
+            JOptionPane.showMessageDialog(null, 
+                    "Nombre: "+cliente.getNombreC()+"\n"
+                    +"Usuario: "+cliente.getNombreU()+"\n"
+                    +"Tarjeta: "+cliente.getTarjeta()+"\n"
+                    +"Correo: "+cliente.getCorreo(),"Detalle",JOptionPane.INFORMATION_MESSAGE);            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No hay información para mostrar","Error",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bDetalleActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,21 +206,24 @@ public class vVerUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bDetalle;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
     private javax.swing.JLabel lUsuarios;
     private javax.swing.JScrollPane sUsuarios;
     private javax.swing.JTable tUsuarios;
     // End of variables declaration//GEN-END:variables
-    
+    Dato datos = new Dato();
+    Nodo auxiliar = new Nodo();
+    Cliente cliente = new Cliente();
     private void rellenarTabla(){
-        Dato datos = new Dato();
+//        datos = new Dato();
         DefaultTableModel modelo = (DefaultTableModel) tUsuarios.getModel();
         Object fila[]= new Object[3];
-        Nodo auxiliar = datos.getUsuarios().getCabeza();        
+        auxiliar = datos.getUsuarios().getCabeza();        
         for (int i=0; i<datos.getUsuarios().getTamaño();i++){
 
-                Cliente cliente = (Cliente) auxiliar.getInfo();
+                cliente = (Cliente) auxiliar.getInfo();
                 fila[0]= cliente.getNombreU();
                 if(cliente.isTipoC()){
                     fila[1]= "Frecuente";

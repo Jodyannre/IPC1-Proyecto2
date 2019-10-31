@@ -231,7 +231,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
         File ruta = imagen.getSelectedFile();
         if(ruta!=null) try {
             tImagen.setText(ruta.getCanonicalPath());
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Error, dirección incorrecta");
         }
         else tImagen.setText(" ");

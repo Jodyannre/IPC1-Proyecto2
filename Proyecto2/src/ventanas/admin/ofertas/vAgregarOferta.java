@@ -5,6 +5,9 @@
  */
 package ventanas.admin.ofertas;
 
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import ventanas.admin.vOferta;
 
 /**
@@ -41,8 +44,8 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lPrioridad = new javax.swing.JLabel();
         tPrecio = new javax.swing.JFormattedTextField();
         lAgregar = new javax.swing.JLabel();
-        cProductos = new javax.swing.JComboBox<>();
         tDescripcion = new javax.swing.JTextField();
+        tProductos = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -106,15 +109,14 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lAgregar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lAgregar.setText("Agregar ofertas");
 
-        cProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         tDescripcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tDescripcion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificarString(evt);
             }
         });
+
+        tProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,21 +133,17 @@ public class vAgregarOferta extends javax.swing.JFrame {
                         .addComponent(bCancelar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lPrioridad)
+                            .addComponent(lDescuento)
+                            .addComponent(lDescripcion)
+                            .addComponent(lProductos))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lPrioridad)
-                                    .addComponent(lDescuento)
-                                    .addComponent(lDescripcion))
-                                .addGap(27, 27, 27)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(tPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(tBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                                    .addComponent(tDescripcion)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lProductos)
-                                .addGap(27, 27, 27)
-                                .addComponent(cProductos, 0, 133, Short.MAX_VALUE))))
+                            .addComponent(tPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(tBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(tDescripcion)
+                            .addComponent(tProductos)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(lAgregar)))
@@ -168,7 +166,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lProductos)
-                    .addComponent(cProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -259,7 +257,6 @@ public class vAgregarOferta extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bCrear;
-    private javax.swing.JComboBox<String> cProductos;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lAgregar;
@@ -270,5 +267,17 @@ public class vAgregarOferta extends javax.swing.JFrame {
     private javax.swing.JTextField tBuscar;
     private javax.swing.JTextField tDescripcion;
     private javax.swing.JFormattedTextField tPrecio;
+    private javax.swing.JTextField tProductos;
     // End of variables declaration//GEN-END:variables
+    Nodo auxiliar = new Nodo();
+    Dato dato = new Dato();
+    Producto producto = new Producto();
+    
+    private boolean validarProductos(){
+        boolean validar = false;
+        String p = tProductos.getText();
+        int tamaño = p.length();
+        
+        return false;
+    }
 }
