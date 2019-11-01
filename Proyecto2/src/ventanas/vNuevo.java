@@ -34,7 +34,6 @@ public class vNuevo extends javax.swing.JFrame {
 
         lCrear = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        tTarjeta = new javax.swing.JTextField();
         lUsuario = new javax.swing.JLabel();
         lContraseña = new javax.swing.JLabel();
         lNombre = new javax.swing.JLabel();
@@ -44,6 +43,7 @@ public class vNuevo extends javax.swing.JFrame {
         tUsuario = new javax.swing.JTextField();
         tNombre = new javax.swing.JTextField();
         tCorreo = new javax.swing.JTextField();
+        tTarjeta = new javax.swing.JFormattedTextField();
         bCrear = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
 
@@ -54,8 +54,6 @@ public class vNuevo extends javax.swing.JFrame {
         lCrear.setText("Crear nuevo usuario");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        tTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lUsuario.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lUsuario.setText("Usuario: ");
@@ -77,8 +75,33 @@ public class vNuevo extends javax.swing.JFrame {
         tUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         tNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tNombreActionPerformed(evt);
+            }
+        });
+        tNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tNombreKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tNombreKeyTyped(evt);
+            }
+        });
 
         tCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        try {
+            tTarjeta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tTarjeta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tTarjetaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -94,7 +117,7 @@ public class vNuevo extends javax.swing.JFrame {
                     .addComponent(lTarjeta))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tContraseña)
+                    .addComponent(tContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addComponent(tUsuario)
                     .addComponent(tCorreo)
                     .addComponent(tNombre)
@@ -124,7 +147,7 @@ public class vNuevo extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lTarjeta)
                     .addComponent(tTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         bCrear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -185,7 +208,7 @@ public class vNuevo extends javax.swing.JFrame {
 
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
         if("".equals(tUsuario.getText()) || "".equals(String.valueOf(tContraseña.getPassword()))
-         ||"".equals(tNombre.getText())||"".equals(tCorreo.getText())||"".equals(tTarjeta.getText())){
+         ||"".equals(tNombre.getText())||"".equals(tCorreo.getText())||"    -    -    -    ".equals(tTarjeta.getText())){
             JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
         }else{
             String usuario = tUsuario.getText();
@@ -207,6 +230,36 @@ public class vNuevo extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void tNombreKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreKeyPressed
+
+    }//GEN-LAST:event_tNombreKeyPressed
+
+    private void tNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tNombreActionPerformed
+
+    private void tNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreKeyTyped
+        char t = evt.getKeyChar();
+        int tecla = (int) t;
+        System.out.println(tecla);
+        if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122)){
+            
+        }else{
+            evt.consume();
+        }
+    }//GEN-LAST:event_tNombreKeyTyped
+
+    private void tTarjetaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tTarjetaKeyTyped
+        char t = evt.getKeyChar();
+        int tecla = (int) t;
+        System.out.println(tecla);
+        if((tecla>=48 && tecla<=57)){
+            
+        }else{
+            evt.consume();
+        } 
+    }//GEN-LAST:event_tTarjetaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -256,7 +309,7 @@ public class vNuevo extends javax.swing.JFrame {
     private javax.swing.JPasswordField tContraseña;
     private javax.swing.JTextField tCorreo;
     private javax.swing.JTextField tNombre;
-    private javax.swing.JTextField tTarjeta;
+    private javax.swing.JFormattedTextField tTarjeta;
     private javax.swing.JTextField tUsuario;
     // End of variables declaration//GEN-END:variables
 }

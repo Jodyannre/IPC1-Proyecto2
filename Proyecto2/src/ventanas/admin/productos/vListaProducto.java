@@ -58,7 +58,6 @@ public class vListaProducto extends javax.swing.JFrame {
                 "Nombre", "Id", "Existencia"
             }
         ));
-        tProductos.setEnabled(false);
         pDisponibles.setViewportView(tProductos);
 
         bEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -140,10 +139,12 @@ public class vListaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el product: ", "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+        int fila = tProductos.getSelectedRow();
+        String seleccion=tProductos.getValueAt(fila, 0).toString();        
+        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el producto: "+seleccion, "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
         if(opcion==0){
-            int fila = tProductos.getSelectedRow();
-            String seleccion=tProductos.getValueAt(fila, 1).toString();
+            fila = tProductos.getSelectedRow();
+            seleccion=tProductos.getValueAt(fila, 1).toString();
             auxiliar = datos.getProductos().getPrimero(); 
             producto = (Producto)auxiliar.getInfo();
             while(!producto.getId().equals(seleccion)){

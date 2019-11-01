@@ -244,15 +244,28 @@ public class vModificarProducto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        producto.setDescripcion(tDescripcion.getText());
-        producto.setExistencia((int)tExistencia.getValue());
-        producto.setImagen(tImagen.getText());
-        producto.setNombre(tNombre.getText());
-        producto.setPrecio(Float.parseFloat(tPrecio.getText()));      
-        datos.getProductos().buscar(producto).setInfo(producto);      
-        vProducto ventana = new vProducto();
-        ventana.setVisible(true);
-        this.dispose();
+        System.out.println(tImagen.getText());
+        if(tDescripcion.getText().equalsIgnoreCase("")||tExistencia.getValue().equals("")||tImagen.getText().equalsIgnoreCase(" ")
+                ||tNombre.getText().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null, "Rellene todos los espacios solicitados","Error en ingreso de datos",JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            producto.setDescripcion(tDescripcion.getText());
+            producto.setExistencia((int)tExistencia.getValue());
+            producto.setImagen(tImagen.getText());
+            producto.setNombre(tNombre.getText());
+            if(tPrecio.getText().equalsIgnoreCase("  .  ")){
+                producto.setPrecio(producto.getPrecio());
+                
+            }else{
+                producto.setPrecio(Float.parseFloat(tPrecio.getText()));
+            }                 
+            datos.getProductos().buscar(producto).setInfo(producto);      
+            vProducto ventana = new vProducto();
+            ventana.setVisible(true);
+            this.dispose();
+        }
+
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bRegresarActionPerformed

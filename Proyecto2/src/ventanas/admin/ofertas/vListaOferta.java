@@ -34,7 +34,7 @@ public class vListaOferta extends javax.swing.JFrame {
 
         lDisponibles = new javax.swing.JLabel();
         pDisponibles = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tOfertas = new javax.swing.JTable();
         bEliminar = new javax.swing.JButton();
         bRegresar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
@@ -45,18 +45,15 @@ public class vListaOferta extends javax.swing.JFrame {
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Ofertas disponibles");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tOfertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Descuento", "Prioridad"
             }
         ));
-        pDisponibles.setViewportView(jTable1);
+        pDisponibles.setViewportView(tOfertas);
 
         bEliminar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         bEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/eliminar.png"))); // NOI18N
@@ -179,8 +176,8 @@ public class vListaOferta extends javax.swing.JFrame {
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bRegresar;
     private javax.swing.JButton bSalir;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lDisponibles;
     private javax.swing.JScrollPane pDisponibles;
+    private javax.swing.JTable tOfertas;
     // End of variables declaration//GEN-END:variables
 }

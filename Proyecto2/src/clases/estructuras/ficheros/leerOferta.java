@@ -9,6 +9,8 @@ import clases.estructuras.Nodo;
 import clases.estructuras.Pila;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class leerOferta {
@@ -64,7 +66,7 @@ public class leerOferta {
         Dato datos = new Dato();
         boolean validar =false;
                 try{
-                    for(int i=0; i<numero;i++){
+                    for(int i=0; i<=numero;i++){
                         switch(contador2){
                             case 0:
                                 if(matriz[i]==','){
@@ -94,7 +96,7 @@ public class leerOferta {
                                 }                           
                                 break;
                             case 3:
-                                if(matriz[i]=='%' ||i==numero-1){
+                                if(matriz[i]=='%' ||i==numero){
                                     contador2=0;   
                                     validar=true;                                   
                                 }else{
@@ -111,6 +113,7 @@ public class leerOferta {
                             agregarProductos();
                             castPrioridad();
                             imprimir();
+                            
                             Oferta nuevo = new Oferta(descripcion,descuento,productos,prioridad);
                             datos.getOfertas().agregar(nuevo, prioridad);
                             descripcion="";
@@ -160,6 +163,10 @@ public class leerOferta {
         Producto producto = (Producto)auxiliar.getInfo();
         while(!pila.estaVacia()){
             if(pila.obtenerCima().toString().equalsIgnoreCase(producto.getNombre())&&vueltas<=dato.getProductos().getTamaño()){
+                producto.setPrecioAnterior(producto.getPrecio());
+                producto.setPrecio(producto.getPrecio()-(producto.getPrecio()*(descuento*0.01f)));
+                System.out.println(producto.getPrecio());
+                System.out.println(producto.getPrecioAnterior());
                 productos.agregar(producto);
             }
             if(vueltas==dato.getProductos().getTamaño()+1){
@@ -177,5 +184,5 @@ public class leerOferta {
             
         } 
         productos.mostrar();
-    }  
+    }
 }

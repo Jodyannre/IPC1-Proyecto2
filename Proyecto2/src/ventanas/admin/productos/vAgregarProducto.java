@@ -54,7 +54,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
         bCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         tPrecio = new javax.swing.JFormattedTextField();
-        tExistencia = new javax.swing.JFormattedTextField();
+        tExistencia = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -140,8 +140,12 @@ public class vAgregarProducto extends javax.swing.JFrame {
         }
         tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        tExistencia.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
         tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tExistencia.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tExistenciaKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -204,7 +208,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lPrecio)
                     .addComponent(tPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lExistencia)
                     .addComponent(tExistencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -215,7 +219,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
                     .addComponent(bBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCrear)
                     .addComponent(bCancelar))
@@ -248,7 +252,8 @@ public class vAgregarProducto extends javax.swing.JFrame {
          ||"".equals(tDescripcion.getText())
          ||"".equals(tExistencia.getText())
          ||"".equals(tPrecio.getText())
-         ||"".equals(tImagen.getText())){
+         ||"".equals(tImagen.getText())
+         ||" ".equals(tImagen.getText())){
             JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
         }else{
             String nombre = tNombre.getText();
@@ -259,6 +264,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
             Producto nuevo = new Producto(nombre,descripcion,imagen,precio,existencia);
             Dato datos = new Dato();
             datos.getProductos().agregar(nuevo);
+            JOptionPane.showMessageDialog(null, "Producto creado con éxito","Creación exitosa",JOptionPane.INFORMATION_MESSAGE);
             vProducto ventana = new vProducto();
             ventana.setVisible(true);
             this.dispose();         
@@ -299,6 +305,17 @@ public class vAgregarProducto extends javax.swing.JFrame {
 //          
 //      }
     }//GEN-LAST:event_verificarDireccion
+
+    private void tExistenciaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tExistenciaKeyTyped
+        char t = evt.getKeyChar();
+        int tecla = (int) t;
+        System.out.println(tecla);
+        if((tecla>=48 && tecla<=57)){
+            
+        }else{
+            evt.consume();
+        } 
+    }//GEN-LAST:event_tExistenciaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -349,7 +366,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lNombre;
     private javax.swing.JLabel lPrecio;
     private javax.swing.JTextField tDescripcion;
-    private javax.swing.JFormattedTextField tExistencia;
+    private javax.swing.JTextField tExistencia;
     private javax.swing.JTextField tImagen;
     private javax.swing.JTextField tNombre;
     private javax.swing.JFormattedTextField tPrecio;

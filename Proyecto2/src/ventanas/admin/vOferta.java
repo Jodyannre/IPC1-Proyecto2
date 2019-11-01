@@ -5,6 +5,9 @@
  */
 package ventanas.admin;
 
+import clases.Oferta;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import clases.estructuras.ficheros.leerOferta;
 import java.io.File;
 import javax.swing.JFileChooser;
@@ -191,15 +194,32 @@ public class vOferta extends javax.swing.JFrame {
     }//GEN-LAST:event_bAgregarActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        vListaOferta ventana = new vListaOferta();
-        ventana.setVisible(true);
-        this.dispose();
+        try{
+
+            oferta = (Oferta)dato.getOfertas().sacarCola().getInfo();
+            if(oferta.isPrioridad()){
+                prioridad="Alta";
+            }else{
+                prioridad="Baja";
+            }
+            JOptionPane.showMessageDialog(null, "Oferta eliminada:"
+                    + "Id: "+oferta.getId()
+                    + "Descuento: "+oferta.getDescuento()
+                    + "Prioridad: "+prioridad);
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No hay ofertas agregadas aún","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+
+
+
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void bMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMostrarActionPerformed
         vVerOferta ventana = new vVerOferta();
         ventana.setVisible(true);
-        this.dispose();
+        this.dispose();        
     }//GEN-LAST:event_bMostrarActionPerformed
 
     /**
@@ -248,4 +268,8 @@ public class vOferta extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lSalir;
     // End of variables declaration//GEN-END:variables
+    Dato dato = new Dato();
+    Nodo eliminado = new Nodo();
+    Oferta oferta = new Oferta();
+    String prioridad = "";
 }

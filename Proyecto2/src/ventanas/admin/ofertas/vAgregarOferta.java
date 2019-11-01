@@ -5,9 +5,12 @@
  */
 package ventanas.admin.ofertas;
 
+import clases.Oferta;
 import clases.Producto;
 import clases.estructuras.Dato;
+import clases.estructuras.ListaCircularSimple;
 import clases.estructuras.Nodo;
+import javax.swing.JOptionPane;
 import ventanas.admin.vOferta;
 
 /**
@@ -33,7 +36,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tBuscar = new javax.swing.JTextField();
+        tPrioridad = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         lDescripcion = new javax.swing.JLabel();
         bCrear = new javax.swing.JButton();
@@ -50,15 +53,15 @@ public class vAgregarOferta extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
 
-        tBuscar.setBackground(new java.awt.Color(252, 249, 249));
-        tBuscar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tBuscar.setDisabledTextColor(new java.awt.Color(252, 249, 249));
-        tBuscar.addActionListener(new java.awt.event.ActionListener() {
+        tPrioridad.setBackground(new java.awt.Color(252, 249, 249));
+        tPrioridad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tPrioridad.setDisabledTextColor(new java.awt.Color(252, 249, 249));
+        tPrioridad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tBuscarActionPerformed(evt);
+                tPrioridadActionPerformed(evt);
             }
         });
-        tBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+        tPrioridad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 verificarString(evt);
             }
@@ -141,7 +144,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(tBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                            .addComponent(tPrioridad, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(tDescripcion)
                             .addComponent(tProductos)))
                     .addGroup(layout.createSequentialGroup()
@@ -169,7 +172,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
                     .addComponent(tProductos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lPrioridad))
                 .addGap(26, 26, 26)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -183,14 +186,41 @@ public class vAgregarOferta extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tBuscarActionPerformed
+    private void tPrioridadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPrioridadActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_tBuscarActionPerformed
+    }//GEN-LAST:event_tPrioridadActionPerformed
 
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
-        vOferta ventana = new vOferta();
-        ventana.setVisible(true);
-        this.dispose();
+        String descripcion = tDescripcion.getText(); 
+        boolean prioridad;
+        if(tPrioridad.getText().equalsIgnoreCase("alta")){
+            prioridad = true;
+        }else{
+            prioridad = false;
+        }
+        descuento = Float.parseFloat(tPrecio.getText());
+        
+        if(tDescripcion.getText().equals("")||tPrecio.getText().equals("")||tProductos.getText().equals("")||tPrioridad.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+            
+        }else{
+            if(validarProductos()&&(tPrioridad.getText().equals("alta")||tPrioridad.getText().equals("baja"))){
+                Oferta nueva = new Oferta(descripcion,descuento, new ListaCircularSimple(),prioridad);
+                agregarProductos(nueva);
+                dato.getOfertas().agregar(nueva, nueva.isPrioridad());
+                vOferta ventana = new vOferta();
+                ventana.setVisible(true);
+                this.dispose();                
+                
+            }else if(!validarProductos()){
+                JOptionPane.showMessageDialog(null, "Error, algún producto está mal escrito o no existe", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(null, "Error, prioridad mal ingresada o no existe", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+            }
+            
+            
+        }
+        
     }//GEN-LAST:event_bCrearActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -264,20 +294,91 @@ public class vAgregarOferta extends javax.swing.JFrame {
     private javax.swing.JLabel lDescuento;
     private javax.swing.JLabel lPrioridad;
     private javax.swing.JLabel lProductos;
-    private javax.swing.JTextField tBuscar;
     private javax.swing.JTextField tDescripcion;
     private javax.swing.JFormattedTextField tPrecio;
+    private javax.swing.JTextField tPrioridad;
     private javax.swing.JTextField tProductos;
     // End of variables declaration//GEN-END:variables
-    Nodo auxiliar = new Nodo();
-    Dato dato = new Dato();
-    Producto producto = new Producto();
+    private Nodo auxiliar = new Nodo();
+    private Dato dato = new Dato();
+    private Producto producto = new Producto();
+    private float descuento;
     
     private boolean validarProductos(){
+        descuento = Float.parseFloat(tPrecio.getText());
         boolean validar = false;
+        boolean existe = true;
         String p = tProductos.getText();
-        int tamaño = p.length();
-        
-        return false;
+        String m[]=p.split(",");
+        int tamaño=m.length;
+        int contador=0;
+        int contador2=0;        
+        try{
+
+            auxiliar = dato.getProductos().getPrimero();
+            contador = dato.getProductos().getTamaño();
+            producto = (Producto) auxiliar.getInfo();
+            for(int i=0;i<tamaño;i++){
+                while(contador2<=contador){
+                    System.out.println(m[i]);
+                    if(m[i].equalsIgnoreCase(producto.getNombre())){
+                        validar=true;
+                        break;
+                    }else{
+                        validar=false;
+                    }
+                    contador2++;
+                    auxiliar=auxiliar.getSiguiente();
+                    producto= (Producto) auxiliar.getInfo(); 
+                    if(contador2==5 &&validar==false){
+                        existe=false;
+                    }
+                }
+                if(!existe){
+                    break;
+                }
+                contador2=0;
+
+            }
+            
+        }catch(Exception e){
+            validar = false;
+            
+        }       
+        return validar;
+    }
+    
+    private void agregarProductos(Oferta oferta){
+        String m[]=tProductos.getText().split(",");
+        int tamaño=m.length;
+        int contador=0;
+        int contador2=0;        
+        try{
+            auxiliar = dato.getProductos().getPrimero();
+            contador = dato.getProductos().getTamaño();
+            producto = (Producto) auxiliar.getInfo();
+            for(int i=0;i<tamaño;i++){
+                while(contador2<contador){
+                    System.out.println(m[i]);
+                    if(m[i].equalsIgnoreCase(producto.getNombre())){
+                        producto.setPrecioAnterior(producto.getPrecio());
+                        producto.setPrecio(producto.getPrecio()-(producto.getPrecio()*(descuento*0.01f)));
+                        System.out.println(producto.getPrecio());
+                        System.out.println(producto.getPrecioAnterior());                        
+                        oferta.getProductos().agregar(producto);
+
+                    }else{
+                    }
+                    contador2++;
+                    auxiliar=auxiliar.getSiguiente();
+                    producto= (Producto) auxiliar.getInfo(); 
+
+                }
+                contador2=0;
+            }            
+        }catch(Exception e){            
+        }
+        System.out.println(oferta.getProductos().mostrar());
+       
     }
 }

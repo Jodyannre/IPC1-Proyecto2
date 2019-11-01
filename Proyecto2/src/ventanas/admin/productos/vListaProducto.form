@@ -85,7 +85,6 @@
                 <Column editable="true" title="Existencia" type="java.lang.Object"/>
               </Table>
             </Property>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

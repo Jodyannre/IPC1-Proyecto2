@@ -113,11 +113,11 @@
                   </Group>
                   <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="tContraseña1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="tUsuario1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="tCorreo1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="tNombre1" alignment="0" max="32767" attributes="0"/>
-                      <Component id="tTarjeta1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tContraseña" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tUsuario" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tCorreo" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tNombre" alignment="0" max="32767" attributes="0"/>
+                      <Component id="tTarjeta" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -128,28 +128,28 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tUsuario1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lUsuario1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lContraseña1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tContraseña1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tContraseña" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="tNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lCorreo1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tCorreo1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tCorreo" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lTarjeta1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="tTarjeta1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="tTarjeta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="27" max="32767" attributes="0"/>
               </Group>
@@ -157,7 +157,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="tTarjeta1">
+        <Component class="javax.swing.JTextField" name="tTarjeta">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
@@ -204,28 +204,28 @@
             <Property name="text" type="java.lang.String" value="No. Tarjeta: "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="tContrase&#xf1;a1">
+        <Component class="javax.swing.JPasswordField" name="tContrase&#xf1;a">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tUsuario1">
+        <Component class="javax.swing.JTextField" name="tUsuario">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tNombre1">
+        <Component class="javax.swing.JTextField" name="tNombre">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="tCorreo1">
+        <Component class="javax.swing.JTextField" name="tCorreo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="14" style="0"/>

@@ -45,7 +45,7 @@
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="tPrecio" alignment="0" pref="130" max="32767" attributes="0"/>
-                          <Component id="tBuscar" alignment="0" pref="130" max="32767" attributes="0"/>
+                          <Component id="tPrioridad" alignment="0" pref="130" max="32767" attributes="0"/>
                           <Component id="tDescripcion" alignment="0" max="32767" attributes="0"/>
                           <Component id="tProductos" max="32767" attributes="0"/>
                       </Group>
@@ -82,7 +82,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="tBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tPrioridad" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lPrioridad" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -98,7 +98,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JTextField" name="tBuscar">
+    <Component class="javax.swing.JTextField" name="tPrioridad">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f9" green="f9" red="fc" type="rgb"/>
@@ -111,7 +111,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tBuscarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tPrioridadActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="verificarString"/>
       </Events>
     </Component>

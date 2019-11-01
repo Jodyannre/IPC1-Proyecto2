@@ -32,16 +32,16 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
         lCrear = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        tTarjeta1 = new javax.swing.JTextField();
+        tTarjeta = new javax.swing.JTextField();
         lUsuario1 = new javax.swing.JLabel();
         lContraseña1 = new javax.swing.JLabel();
         lNombre1 = new javax.swing.JLabel();
         lCorreo1 = new javax.swing.JLabel();
         lTarjeta1 = new javax.swing.JLabel();
-        tContraseña1 = new javax.swing.JPasswordField();
-        tUsuario1 = new javax.swing.JTextField();
-        tNombre1 = new javax.swing.JTextField();
-        tCorreo1 = new javax.swing.JTextField();
+        tContraseña = new javax.swing.JPasswordField();
+        tUsuario = new javax.swing.JTextField();
+        tNombre = new javax.swing.JTextField();
+        tCorreo = new javax.swing.JTextField();
         bCrear = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
         lNombreBarra = new javax.swing.JLabel();
@@ -56,7 +56,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        tTarjeta1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lUsuario1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lUsuario1.setText("Usuario: ");
@@ -73,13 +73,13 @@ public class vModificarPerfil extends javax.swing.JFrame {
         lTarjeta1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lTarjeta1.setText("No. Tarjeta: ");
 
-        tContraseña1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        tUsuario1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        tNombre1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
-        tCorreo1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,11 +95,11 @@ public class vModificarPerfil extends javax.swing.JFrame {
                     .addComponent(lTarjeta1))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tContraseña1)
-                    .addComponent(tUsuario1)
-                    .addComponent(tCorreo1)
-                    .addComponent(tNombre1)
-                    .addComponent(tTarjeta1))
+                    .addComponent(tContraseña)
+                    .addComponent(tUsuario)
+                    .addComponent(tCorreo)
+                    .addComponent(tNombre)
+                    .addComponent(tTarjeta))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -107,24 +107,24 @@ public class vModificarPerfil extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tUsuario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lUsuario1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lContraseña1)
-                    .addComponent(tContraseña1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tNombre1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lNombre1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lCorreo1)
-                    .addComponent(tCorreo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lTarjeta1)
-                    .addComponent(tTarjeta1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
 
@@ -245,29 +245,18 @@ public class vModificarPerfil extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bCrear;
     private javax.swing.JButton bSalir;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel lContraseña;
     private javax.swing.JLabel lContraseña1;
-    private javax.swing.JLabel lCorreo;
     private javax.swing.JLabel lCorreo1;
     private javax.swing.JLabel lCrear;
-    private javax.swing.JLabel lNombre;
     private javax.swing.JLabel lNombre1;
     private javax.swing.JLabel lNombreBarra;
-    private javax.swing.JLabel lTarjeta;
     private javax.swing.JLabel lTarjeta1;
-    private javax.swing.JLabel lUsuario;
     private javax.swing.JLabel lUsuario1;
     private javax.swing.JPasswordField tContraseña;
-    private javax.swing.JPasswordField tContraseña1;
     private javax.swing.JTextField tCorreo;
-    private javax.swing.JTextField tCorreo1;
     private javax.swing.JTextField tNombre;
-    private javax.swing.JTextField tNombre1;
     private javax.swing.JTextField tTarjeta;
-    private javax.swing.JTextField tTarjeta1;
     private javax.swing.JTextField tUsuario;
-    private javax.swing.JTextField tUsuario1;
     // End of variables declaration//GEN-END:variables
 }
