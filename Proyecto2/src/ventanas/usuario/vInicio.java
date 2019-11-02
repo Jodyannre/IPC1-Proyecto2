@@ -5,6 +5,25 @@
  */
 package ventanas.usuario;
 
+import clases.Cliente;
+import clases.Oferta;
+import clases.Producto;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import ventanas.vLogin;
 
 /**
@@ -15,10 +34,24 @@ public class vInicio extends javax.swing.JFrame {
 
     /**
      * Creates new form vInicio
+     * @param usuario
+     * @param cliente
      */
-    public vInicio() {
+    public vInicio(String usuario, Cliente cliente) {
+        this.usuario=usuario;  
+        this.cliente=cliente;
         initComponents();
+        try{
+            agregarProductos();    
+        }catch(Exception e){
+            
+        }
+        lBienvenida.setText("Hola, "+usuario);
         setLocationRelativeTo(null);
+    }
+
+    private vInicio() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -38,13 +71,6 @@ public class vInicio extends javax.swing.JFrame {
         lOfertas = new javax.swing.JLabel();
         sOfertas = new javax.swing.JScrollPane();
         pOfertas = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
         bProductos = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         lTiendecita = new javax.swing.JLabel();
@@ -76,101 +102,7 @@ public class vInicio extends javax.swing.JFrame {
         lOfertas.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lOfertas.setText("Ofertas");
 
-        jPanel2.setBackground(new java.awt.Color(255, 0, 51));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
-        );
-
-        jPanel3.setBackground(new java.awt.Color(255, 0, 51));
-
-        jLabel2.setText("jLabel2");
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-
-        jLabel1.setText("jLabel1");
-
-        jButton1.setText("jButton1");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE))
-                .addContainerGap(21, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanel4.setBackground(new java.awt.Color(255, 0, 51));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 265, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 305, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout pOfertasLayout = new javax.swing.GroupLayout(pOfertas);
-        pOfertas.setLayout(pOfertasLayout);
-        pOfertasLayout.setHorizontalGroup(
-            pOfertasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pOfertasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pOfertasLayout.setVerticalGroup(
-            pOfertasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pOfertasLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(pOfertasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(50, Short.MAX_VALUE))
-        );
-
+        pOfertas.setLayout(new java.awt.GridLayout(0, 3));
         sOfertas.setViewportView(pOfertas);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -178,13 +110,14 @@ public class vInicio extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(sOfertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(sOfertas, javax.swing.GroupLayout.PREFERRED_SIZE, 873, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(389, 389, 389)
+                        .addComponent(lOfertas)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lOfertas)
-                .addGap(380, 380, 380))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,8 +125,7 @@ public class vInicio extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addComponent(lOfertas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sOfertas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(sOfertas, javax.swing.GroupLayout.DEFAULT_SIZE, 417, Short.MAX_VALUE))
         );
 
         bProductos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -205,7 +137,7 @@ public class vInicio extends javax.swing.JFrame {
             }
         });
 
-        lTiendecita.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lTiendecita.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         lTiendecita.setText("Tiendecita");
 
         bModificar.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -237,13 +169,13 @@ public class vInicio extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lTiendecita)
-                .addGap(370, 370, 370))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bProductos)
                 .addGap(313, 313, 313))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(354, 354, 354)
+                .addComponent(lTiendecita)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -272,7 +204,7 @@ public class vInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
-        vModificarPerfil ventana = new vModificarPerfil();
+        vModificarPerfil ventana = new vModificarPerfil(usuario, cliente);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bModificarActionPerformed
@@ -284,7 +216,7 @@ public class vInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bProductosActionPerformed
-        vProductoTienda ventana = new vProductoTienda();
+        vProductoTienda ventana = new vProductoTienda(usuario,cliente);
         ventana.setVisible(true);
         this.dispose();
         
@@ -319,6 +251,7 @@ public class vInicio extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new vInicio().setVisible(true);
             }
@@ -331,14 +264,7 @@ public class vInicio extends javax.swing.JFrame {
     private javax.swing.JButton bPagar;
     private javax.swing.JButton bProductos;
     private javax.swing.JButton bSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lBienvenida;
     private javax.swing.JLabel lOfertas;
@@ -346,4 +272,64 @@ public class vInicio extends javax.swing.JFrame {
     private javax.swing.JPanel pOfertas;
     private javax.swing.JScrollPane sOfertas;
     // End of variables declaration//GEN-END:variables
+    String usuario;
+    Cliente cliente = new Cliente();    
+    Nodo auxiliar = new Nodo();
+    Nodo auxiliar2 = new Nodo();
+    Dato dato = new Dato();
+    Oferta oferta = new Oferta();
+    Producto producto = new Producto();
+    
+    private void dibujarProductos(String nombre, String precio, String anterior,String i){
+        JPanel panelPrincipal = new JPanel();
+        JPanel panelImagen = new JPanel();
+        JLabel imagen = new JLabel();
+        Border lineaNegra = BorderFactory.createLineBorder(Color.black);
+        JTextArea area = new JTextArea(2,2);
+        area.setText(nombre);
+        JButton boton = new JButton("Antes: "+anterior+" Ahora: "+precio);
+        boton.setIcon(new ImageIcon("C:\\Users\\Jo\\Documents\\NetBeansProjects\\Proyecto2\\src\\imagenes\\iconos\\carrito.png"));
+        imagen.setIcon(new ImageIcon(i));
+        
+
+        panelPrincipal.setSize(265, 299);
+        panelPrincipal.setLayout(new BoxLayout(panelPrincipal,BoxLayout.PAGE_AXIS));
+        panelImagen.setSize(34, 223);
+//        panelImagen.setBackground(Color.BLUE);
+        panelImagen.setBorder(lineaNegra);
+        panelImagen.add(imagen);
+        imagen.setAlignmentX(CENTER_ALIGNMENT);
+        boton.setAlignmentX(CENTER_ALIGNMENT); 
+        area.setAlignmentX(CENTER_ALIGNMENT);
+        boton.setSize(73, 23);   
+        area.setBackground(new Color(0,0,0,0));
+        area.setBorder(BorderFactory.createEmptyBorder());
+        area.setLineWrap(true);
+        panelPrincipal.add(panelImagen);
+        panelPrincipal.add(area);
+        panelPrincipal.add(boton); 
+        Border border = panelPrincipal.getBorder();
+        Border margin = new EmptyBorder(5,5,5,5);
+        panelPrincipal.setBorder(new CompoundBorder(border, margin));        
+        pOfertas.add(panelPrincipal); 
+    }
+    
+    private void agregarProductos(){
+        auxiliar = dato.getOfertas().getInicio();
+        oferta = (Oferta) auxiliar.getInfo();
+        auxiliar2 = oferta.getProductos().getPrimero();
+        producto = (Producto) auxiliar2.getInfo();
+        for(int i=0; i<dato.getOfertas().getTamaño();i++){
+            for(int j=0;j<oferta.getProductos().getTamaño();j++){
+                dibujarProductos(producto.getNombre(),String.valueOf(producto.getPrecio()),String.valueOf(producto.getPrecioAnterior()),producto.getImagen());
+                auxiliar2= auxiliar2.getSiguiente();
+                producto = (Producto) auxiliar2.getInfo(); 
+            } 
+            auxiliar = auxiliar.getSiguiente();
+            oferta = (Oferta) auxiliar.getInfo();
+            auxiliar2 = oferta.getProductos().getPrimero();
+            producto = (Producto) auxiliar2.getInfo();            
+        }
+        
+    }
 }

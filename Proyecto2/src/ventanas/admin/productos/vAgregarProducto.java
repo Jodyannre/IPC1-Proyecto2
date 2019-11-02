@@ -53,8 +53,8 @@ public class vAgregarProducto extends javax.swing.JFrame {
         bCrear = new javax.swing.JButton();
         bCancelar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
-        tPrecio = new javax.swing.JFormattedTextField();
         tExistencia = new javax.swing.JTextField();
+        tPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -133,17 +133,17 @@ public class vAgregarProducto extends javax.swing.JFrame {
             }
         });
 
-        try {
-            tPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
         tExistencia.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tExistencia.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 tExistenciaKeyTyped(evt);
+            }
+        });
+
+        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tPrecioKeyTyped(evt);
             }
         });
 
@@ -166,9 +166,9 @@ public class vAgregarProducto extends javax.swing.JFrame {
                         .addComponent(lDescripcion)
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tExistencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tPrecio, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tExistencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -317,6 +317,17 @@ public class vAgregarProducto extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_tExistenciaKeyTyped
 
+    private void tPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPrecioKeyTyped
+      char caracter = evt.getKeyChar();
+
+      // Verificar dígitos
+      if((((int)caracter >= 48) && ((int)caracter <= 57)) ||         
+         ((int)caracter == 46 )){            
+      }else{
+          evt.consume();  // ignorar 
+      }
+    }//GEN-LAST:event_tPrecioKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -369,6 +380,6 @@ public class vAgregarProducto extends javax.swing.JFrame {
     private javax.swing.JTextField tExistencia;
     private javax.swing.JTextField tImagen;
     private javax.swing.JTextField tNombre;
-    private javax.swing.JFormattedTextField tPrecio;
+    private javax.swing.JTextField tPrecio;
     // End of variables declaration//GEN-END:variables
 }

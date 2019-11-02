@@ -45,10 +45,10 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lProductos = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         lPrioridad = new javax.swing.JLabel();
-        tPrecio = new javax.swing.JFormattedTextField();
         lAgregar = new javax.swing.JLabel();
         tDescripcion = new javax.swing.JTextField();
         tProductos = new javax.swing.JTextField();
+        tPrecio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
@@ -97,18 +97,6 @@ public class vAgregarOferta extends javax.swing.JFrame {
         lPrioridad.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lPrioridad.setText("Prioridad: ");
 
-        try {
-            tPrecio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##.##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        tPrecio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tPrecioActionPerformed(evt);
-            }
-        });
-
         lAgregar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lAgregar.setText("Agregar ofertas");
 
@@ -120,6 +108,18 @@ public class vAgregarOferta extends javax.swing.JFrame {
         });
 
         tProductos.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tProductos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tProductosKeyTyped(evt);
+            }
+        });
+
+        tPrecio.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tPrecioKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -143,10 +143,10 @@ public class vAgregarOferta extends javax.swing.JFrame {
                             .addComponent(lProductos))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tPrecio, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(tPrioridad, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(tDescripcion)
-                            .addComponent(tProductos)))
+                            .addComponent(tProductos)
+                            .addComponent(tPrecio)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(104, 104, 104)
                         .addComponent(lAgregar)))
@@ -208,6 +208,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
                 Oferta nueva = new Oferta(descripcion,descuento, new ListaCircularSimple(),prioridad);
                 agregarProductos(nueva);
                 dato.getOfertas().agregar(nueva, nueva.isPrioridad());
+                JOptionPane.showMessageDialog(null, "Oferta credad con éxito","Creación de oferta",JOptionPane.INFORMATION_MESSAGE);
                 vOferta ventana = new vOferta();
                 ventana.setVisible(true);
                 this.dispose();                
@@ -229,10 +230,6 @@ public class vAgregarOferta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bCancelarActionPerformed
 
-    private void tPrecioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tPrecioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tPrecioActionPerformed
-
     private void verificarString(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_verificarString
       char caracter = evt.getKeyChar();
 
@@ -248,6 +245,30 @@ public class vAgregarOferta extends javax.swing.JFrame {
       
                 
     }//GEN-LAST:event_verificarString
+
+    private void tProductosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tProductosKeyTyped
+      char caracter = evt.getKeyChar();
+
+      // Verificar dígitos
+      if((((int)caracter < 97) || ((int)caracter > 122))
+          && ((int)caracter!=44)){
+          evt.consume();  // ignorar
+                      
+      }else{
+           
+      }
+    }//GEN-LAST:event_tProductosKeyTyped
+
+    private void tPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tPrecioKeyTyped
+      char caracter = evt.getKeyChar();
+
+      // Verificar dígitos
+      if((((int)caracter >= 48) && ((int)caracter <= 57)) ||         
+         ((int)caracter == 46 )){            
+      }else{
+          evt.consume();  // ignorar 
+      }
+    }//GEN-LAST:event_tPrecioKeyTyped
 
     /**
      * @param args the command line arguments
@@ -295,7 +316,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
     private javax.swing.JLabel lPrioridad;
     private javax.swing.JLabel lProductos;
     private javax.swing.JTextField tDescripcion;
-    private javax.swing.JFormattedTextField tPrecio;
+    private javax.swing.JTextField tPrecio;
     private javax.swing.JTextField tPrioridad;
     private javax.swing.JTextField tProductos;
     // End of variables declaration//GEN-END:variables

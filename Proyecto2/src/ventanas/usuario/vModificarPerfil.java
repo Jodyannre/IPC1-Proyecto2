@@ -5,6 +5,11 @@
  */
 package ventanas.usuario;
 
+import clases.Cliente;
+import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
+import java.util.HashSet;
+import javax.swing.JOptionPane;
 import ventanas.vLogin;
 
 /**
@@ -15,10 +20,20 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
     /**
      * Creates new form vModificarPerfil
+     * @param usuario
+     * @param cliente
      */
-    public vModificarPerfil() {
+    public vModificarPerfil(String usuario, Cliente cliente) {
+        this.usuario=usuario;
+        this.cliente=cliente;
         initComponents();
+        cargarDatos();
+        lNombreBarra.setText("Hola, "+usuario);
         setLocationRelativeTo(null);
+    }
+
+    private vModificarPerfil() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -32,7 +47,6 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
         lCrear = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        tTarjeta = new javax.swing.JTextField();
         lUsuario1 = new javax.swing.JLabel();
         lContraseña1 = new javax.swing.JLabel();
         lNombre1 = new javax.swing.JLabel();
@@ -42,6 +56,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
         tUsuario = new javax.swing.JTextField();
         tNombre = new javax.swing.JTextField();
         tCorreo = new javax.swing.JTextField();
+        tTarjeta = new javax.swing.JFormattedTextField();
         bCrear = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
         lNombreBarra = new javax.swing.JLabel();
@@ -55,8 +70,6 @@ public class vModificarPerfil extends javax.swing.JFrame {
         lCrear.setText("Modificar datos");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        tTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         lUsuario1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lUsuario1.setText("Usuario: ");
@@ -76,10 +89,23 @@ public class vModificarPerfil extends javax.swing.JFrame {
         tContraseña.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         tUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tUsuario.setEnabled(false);
 
         tNombre.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tNombreKeyTyped(evt);
+            }
+        });
 
         tCorreo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+
+        try {
+            tTarjeta.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("####-####-####-####")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        tTarjeta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,7 +121,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
                     .addComponent(lTarjeta1))
                 .addGap(72, 72, 72)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(tContraseña)
+                    .addComponent(tContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                     .addComponent(tUsuario)
                     .addComponent(tCorreo)
                     .addComponent(tNombre)
@@ -125,7 +151,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lTarjeta1)
                     .addComponent(tTarjeta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         bCrear.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -178,7 +204,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(39, Short.MAX_VALUE)
+                        .addContainerGap(36, Short.MAX_VALUE)
                         .addComponent(lCrear))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lNombreBarra)
@@ -196,16 +222,44 @@ public class vModificarPerfil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCrearActionPerformed
-        vInicio ventana = new vInicio();
-        ventana.setVisible(true);
-        this.dispose();
+            if(tUsuario.getText().equals("")
+             ||tNombre.getText().equals("")
+             ||tTarjeta.getText().equals("    -    -    -    ")
+             ||"".equals(String.valueOf(tContraseña.getPassword()))
+             ||tCorreo.getText().equals("")){
+                JOptionPane.showMessageDialog(null, "Ingrese todos los datos solicitados", "Error al guardar", JOptionPane.ERROR_MESSAGE);
+            }else{
+                cliente.setNombreC(tNombre.getText());
+                cliente.setTarjeta(tTarjeta.getText());
+                cliente.setCorreo(tCorreo.getText());
+                cliente.setPass(String.valueOf(tContraseña.getPassword()));
+                dato.getUsuarios().buscar(cliente).setInfo(cliente);
+                JOptionPane.showMessageDialog(null, "Perfil modificado correctamente","Modificación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                vInicio ventana = new vInicio(usuario, cliente);
+                ventana.setVisible(true);
+                this.dispose();                
+            }
+
+
+
     }//GEN-LAST:event_bCrearActionPerformed
 
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-        vInicio ventana = new vInicio();
+        vInicio ventana = new vInicio(usuario, cliente);
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void tNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tNombreKeyTyped
+        char t = evt.getKeyChar();
+        int tecla = (int) t;
+        System.out.println(tecla);
+        if(((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122)) || tecla==32){
+            
+        }else{
+            evt.consume();
+        }
+    }//GEN-LAST:event_tNombreKeyTyped
 
     /**
      * @param args the command line arguments
@@ -236,6 +290,7 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new vModificarPerfil().setVisible(true);
             }
@@ -256,7 +311,19 @@ public class vModificarPerfil extends javax.swing.JFrame {
     private javax.swing.JPasswordField tContraseña;
     private javax.swing.JTextField tCorreo;
     private javax.swing.JTextField tNombre;
-    private javax.swing.JTextField tTarjeta;
+    private javax.swing.JFormattedTextField tTarjeta;
     private javax.swing.JTextField tUsuario;
     // End of variables declaration//GEN-END:variables
+    private String usuario;
+    private Nodo auxiliar = new Nodo();
+    private Dato dato = new Dato();
+    private Cliente cliente = new Cliente();
+    
+    private void cargarDatos(){      
+        tUsuario.setText(cliente.getNombreU());
+        tNombre.setText(cliente.getNombreC());
+        tTarjeta.setText(cliente.getTarjeta());
+        tContraseña.setText(cliente.getPass());
+        tCorreo.setText(cliente.getCorreo());
+    }
 }

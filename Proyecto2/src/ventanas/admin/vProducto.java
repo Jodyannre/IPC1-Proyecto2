@@ -198,13 +198,21 @@ public class vProducto extends javax.swing.JFrame {
                     this.dispose();                    
                     break;
                 case 2:
+                    boolean error = false;
                     JFileChooser ingreso = new JFileChooser();
                     ingreso.showOpenDialog(this);
                     File ruta = ingreso.getSelectedFile();
                     leerProducto leer = new leerProducto(ruta.toString());
                     leer.leer();
-                    leer.asignar();                    
-
+                    try{
+                        leer.asignar();    
+                    }catch(Exception e){
+                        JOptionPane.showMessageDialog(null, "Datos de entrada erróneos","Error",JOptionPane.ERROR_MESSAGE);
+                        error =true;
+                        
+                    }
+                    if(!error) JOptionPane.showMessageDialog(null, "Productos creados correctamente","Creación exitosa",JOptionPane.INFORMATION_MESSAGE);     
+                    
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible","Error",JOptionPane.ERROR_MESSAGE);                    

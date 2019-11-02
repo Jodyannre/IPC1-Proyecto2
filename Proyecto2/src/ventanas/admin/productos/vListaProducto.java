@@ -139,24 +139,32 @@ public class vListaProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        int fila = tProductos.getSelectedRow();
-        String seleccion=tProductos.getValueAt(fila, 0).toString();        
-        int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el producto: "+seleccion, "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
-        if(opcion==0){
-            fila = tProductos.getSelectedRow();
-            seleccion=tProductos.getValueAt(fila, 1).toString();
-            auxiliar = datos.getProductos().getPrimero(); 
-            producto = (Producto)auxiliar.getInfo();
-            while(!producto.getId().equals(seleccion)){
-                auxiliar=auxiliar.getSiguiente();
+        try{
+            
+            int fila = tProductos.getSelectedRow();
+            String seleccion=tProductos.getValueAt(fila, 0).toString();        
+            int opcion = JOptionPane.showConfirmDialog(this, "Esta seguro que desea eliminar el producto: "+seleccion, "Eliminar",JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.QUESTION_MESSAGE);
+            if(opcion==0){
+                fila = tProductos.getSelectedRow();
+                seleccion=tProductos.getValueAt(fila, 1).toString();
+                auxiliar = datos.getProductos().getPrimero(); 
                 producto = (Producto)auxiliar.getInfo();
-            }
-            datos.getProductos().eliminar(producto);
-            JOptionPane.showMessageDialog(null, "Producto borrado con éxito", "Resultado",JOptionPane.INFORMATION_MESSAGE,null);
-            vProducto nuevo = new vProducto();
-            nuevo.setVisible(true);
-            this.dispose();
+                while(!producto.getId().equals(seleccion)){
+                    auxiliar=auxiliar.getSiguiente();
+                    producto = (Producto)auxiliar.getInfo();
+                }
+                datos.getProductos().eliminar(producto);
+                JOptionPane.showMessageDialog(null, "Producto borrado con éxito", "Resultado",JOptionPane.INFORMATION_MESSAGE,null);
+                vProducto nuevo = new vProducto();
+                nuevo.setVisible(true);
+                this.dispose();
+            }            
+            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "No hay productos agregados aún","Error",JOptionPane.ERROR_MESSAGE);
         }
+        
+
     }//GEN-LAST:event_bEliminarActionPerformed
 
     /**

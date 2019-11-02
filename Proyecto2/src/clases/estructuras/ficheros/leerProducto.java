@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 
 
@@ -59,8 +60,16 @@ public class leerProducto{
     public void asignar(){
         Dato datos = new Dato();
         boolean validar =false;
+        boolean noEsProducto = false;
+        int l;
+        
+            
                 try{
                     for(int i=0; i<numero;i++){
+                        if(matriz[i]=='%'){
+                            noEsProducto = true;
+                            break;
+                        }
                         switch(contador2){
                             case 0:
                                 if(matriz[i]==','){
@@ -116,7 +125,11 @@ public class leerProducto{
                         }
                     }             
                 }catch(Exception e){ 
+//                    JOptionPane.showMessageDialog(null, "Formato de archivo desconocido","Error",JOptionPane.ERROR_MESSAGE);
+                    Integer.parseInt("hola");
                 }  
+                
+                if(noEsProducto) l = Integer.parseInt("hola");
                 datos.getProductos().mostrar();
 
 

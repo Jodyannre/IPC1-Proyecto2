@@ -8,6 +8,7 @@ public class Admin extends Usuario {
         this.nombreU = nombreU;
         this.pass = String.valueOf(pass);
     }
+
     
     @Override
     public void metodo() {

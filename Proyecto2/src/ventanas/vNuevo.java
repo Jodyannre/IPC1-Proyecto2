@@ -7,6 +7,7 @@ package ventanas;
 
 import clases.Cliente;
 import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import javax.swing.JOptionPane;
 
 /**
@@ -216,12 +217,19 @@ public class vNuevo extends javax.swing.JFrame {
             String correo = tCorreo.getText();
             char pass[] = tContraseña.getPassword();
             String tarjeta = tTarjeta.getText();
-            Cliente nuevo = new Cliente(usuario,pass,nombre,correo,tarjeta);
-            Dato datos = new Dato();
-            datos.getUsuarios().agregar(nuevo);
-            vLogin ventana = new vLogin();
-            ventana.setVisible(true);
-            this.dispose();            
+            
+            if(comprobar(usuario)){
+                JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe","Error en ingreso de datos",JOptionPane.ERROR_MESSAGE);
+            }else{
+                Cliente nuevo = new Cliente(usuario,pass,nombre,correo,tarjeta);
+                Dato datos = new Dato();
+                datos.getUsuarios().agregar(nuevo);
+                JOptionPane.showMessageDialog(null, "Usuario creado con éxito","Creación de usuario",JOptionPane.INFORMATION_MESSAGE);
+                vLogin ventana = new vLogin();
+                ventana.setVisible(true);
+                this.dispose();                   
+            }
+         
         }     
     }//GEN-LAST:event_bCrearActionPerformed
 
@@ -243,7 +251,7 @@ public class vNuevo extends javax.swing.JFrame {
         char t = evt.getKeyChar();
         int tecla = (int) t;
         System.out.println(tecla);
-        if((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122)){
+        if(((tecla>=65 && tecla<=90) || (tecla>=97 && tecla<=122)) || tecla==32){
             
         }else{
             evt.consume();
@@ -312,4 +320,28 @@ public class vNuevo extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField tTarjeta;
     private javax.swing.JTextField tUsuario;
     // End of variables declaration//GEN-END:variables
+    Nodo auxiliar = new Nodo();
+    Dato dato = new Dato();
+    Cliente cliente = new Cliente();
+    
+    
+    private boolean comprobar(String usuario){
+        boolean validar = false;
+        try{
+            auxiliar = dato.getUsuarios().getCabeza();
+            cliente = (Cliente)auxiliar.getInfo();
+            for(int i=0;i<dato.getUsuarios().getTamaño();i++){
+                if(usuario.equalsIgnoreCase(cliente.getNombreU())){
+                    validar=true;
+                    break;
+                }
+                auxiliar=auxiliar.getSiguiente();
+                cliente=(Cliente)auxiliar.getInfo();
+        }            
+        }catch(Exception e){
+            
+        }
+        
+        return validar;
+    }
 }

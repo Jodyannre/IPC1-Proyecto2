@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 public class leerOferta {
 
     String url,nombreProducto,descripcion,descuentoT,prioridadT;
-    int c;
+    int c,contar,contarPila;
     float descuento;
     char caracter;
     char matriz[];
@@ -87,9 +87,12 @@ public class leerOferta {
                                     if(matriz[i]==','){
                                         contador2++;
                                         pila.agregar(nombreProducto);
+//                                        nombreProducto="";
+                                        pila.mostrarPila();  //MOSTRANDO PILA BORRAR
                                     }else if(matriz[i]==';'){
                                         pila.agregar(nombreProducto);
                                         nombreProducto="";
+                                        pila.mostrarPila();  //Mostrando pila BORRAR
                                     }                                   
                                 }else{
                                     nombreProducto = nombreProducto+matriz[i];
@@ -113,9 +116,12 @@ public class leerOferta {
                             agregarProductos();
                             castPrioridad();
                             imprimir();
-                            
-                            Oferta nuevo = new Oferta(descripcion,descuento,productos,prioridad);
-                            datos.getOfertas().agregar(nuevo, prioridad);
+                            if(contar==contarPila){
+                                Oferta nuevo = new Oferta(descripcion,descuento,productos,prioridad);
+                                datos.getOfertas().agregar(nuevo, prioridad);                                
+                            }else{
+                                JOptionPane.showMessageDialog(null, "No se pudieron agregar algunas ofertas por error en el archivo de entrada", "Error en la creación de ofertas", JOptionPane.ERROR_MESSAGE);
+                            }
                             descripcion="";
                             descuentoT="";
                             prioridadT="";
@@ -159,6 +165,8 @@ public class leerOferta {
     private void agregarProductos(){
         Dato dato = new Dato();
         int vueltas = 0;
+        contar = 0;
+        contarPila = pila.getTamaño();
         Nodo auxiliar = dato.getProductos().getPrimero();
         Producto producto = (Producto)auxiliar.getInfo();
         while(!pila.estaVacia()){
@@ -168,8 +176,11 @@ public class leerOferta {
                 System.out.println(producto.getPrecio());
                 System.out.println(producto.getPrecioAnterior());
                 productos.agregar(producto);
+                contar++;
+            }else{
+
             }
-            if(vueltas==dato.getProductos().getTamaño()+1){
+            if(vueltas==dato.getProductos().getTamaño()-1){
                 pila.sacarPila();
                 vueltas++;
             }
@@ -178,7 +189,7 @@ public class leerOferta {
                 producto = (Producto)auxiliar.getInfo();
                 vueltas++;                
             } 
-            if(vueltas==dato.getProductos().getTamaño()+2){
+            if(vueltas==dato.getProductos().getTamaño()+1){
                 vueltas=0;               
             }            
             

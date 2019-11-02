@@ -5,9 +5,14 @@
  */
 package ventanas;
 
+import clases.Admin;
+import clases.Cliente;
 import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import java.io.File;
+import javax.swing.JOptionPane;
 import ventanas.admin.vAdmin;
+import ventanas.usuario.vInicio;
 
 
 /**
@@ -163,12 +168,33 @@ public class vLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_tUserActionPerformed
 
     private void bIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bIngresarActionPerformed
-        vAdmin ventana = new vAdmin();
-        ventana.setVisible(true);
-        this.dispose();
-//        vInicio ventana = new vInicio();
-//        ventana.setVisible(true);
-//        this.dispose();
+
+
+        usuario = tUser.getText();
+        pass = String.valueOf(tPass.getPassword());
+        
+        if(usuario.equalsIgnoreCase("Admin")){
+            if(comprobarDatos()){
+                JOptionPane.showMessageDialog(null, "Bienvenido administrador","Ingreso",JOptionPane.INFORMATION_MESSAGE);
+                vAdmin ventana = new vAdmin();
+                ventana.setVisible(true);
+                this.dispose();                
+            }else{
+                JOptionPane.showMessageDialog(null, "Datos incorrectos","Error en el ingreso de datos",JOptionPane.ERROR_MESSAGE);
+            }
+        }else{
+            if(comprobarDatos()){
+                JOptionPane.showMessageDialog(null, "Bienvenido "+usuario,"Ingreso",JOptionPane.INFORMATION_MESSAGE);
+                vInicio ventana = new vInicio(usuario, cliente);
+                ventana.setVisible(true);
+                this.dispose();                
+            }else{
+                JOptionPane.showMessageDialog(null, "Datos incorrectos","Error en el ingreso de datos",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+//                vInicio ventana = new vInicio(usuario, cliente);
+//                ventana.setVisible(true);
+//                this.dispose();         
     }//GEN-LAST:event_bIngresarActionPerformed
 
     private void jCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearActionPerformed
@@ -229,4 +255,37 @@ public class vLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField tPass;
     private javax.swing.JTextField tUser;
     // End of variables declaration//GEN-END:variables
+    String usuario,pass;
+    Nodo auxiliar = new Nodo();
+    Dato dato = new Dato();
+    Cliente cliente = new Cliente();
+    char contraseña[] = "admin".toCharArray();   
+    Admin admin = new Admin("admin",contraseña);
+    
+        
+    private boolean comprobarDatos(){
+        boolean validar = false;
+        try{            
+
+            if(usuario.equalsIgnoreCase(admin.getNombreU())){
+                validar = pass.equals(admin.getPass());    
+            }else{
+                auxiliar = dato.getUsuarios().getCabeza();
+                cliente = (Cliente) auxiliar.getInfo();                
+                for (int i=0;i<dato.getUsuarios().getTamaño();i++){
+                    if(usuario.equalsIgnoreCase(cliente.getNombreU())
+                            && pass.equals(cliente.getPass())){
+                        validar = true;
+                        break;
+                    }
+                    auxiliar = auxiliar.getSiguiente();
+                    cliente = (Cliente) auxiliar.getInfo(); 
+                }
+            }            
+            
+        }catch(Exception e){
+            
+        }
+        return validar;
+    }
 }

@@ -183,7 +183,8 @@ public class vOferta extends javax.swing.JFrame {
                     File ruta = ingreso.getSelectedFile();
                     leerOferta leer = new leerOferta(ruta.toString());
                     leer.leer();
-                    leer.asignar();                    
+                    leer.asignar(); 
+                    JOptionPane.showMessageDialog(null, "Ofertas agregadas correctamente","Creación exitosa",JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible","Error",JOptionPane.ERROR_MESSAGE);                    
@@ -203,9 +204,9 @@ public class vOferta extends javax.swing.JFrame {
                 prioridad="Baja";
             }
             JOptionPane.showMessageDialog(null, "Oferta eliminada:"
-                    + "Id: "+oferta.getId()
-                    + "Descuento: "+oferta.getDescuento()
-                    + "Prioridad: "+prioridad);
+                    + "\nId: "+oferta.getId()
+                    + "\nDescuento: "+oferta.getDescuento()
+                    + "\nPrioridad: "+prioridad);
             
         }catch(Exception e){
             JOptionPane.showMessageDialog(null, "No hay ofertas agregadas aún","Error",JOptionPane.ERROR_MESSAGE);
