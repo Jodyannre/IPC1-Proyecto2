@@ -5,14 +5,8 @@
  */
 package clases;
 
-import clases.estructuras.ColaPrioridad;
-import clases.estructuras.ListaCircularSimple;
-import clases.estructuras.ListaSimple;
-import clases.estructuras.Nodo;
-import clases.estructuras.Pila;
 import clases.estructuras.ficheros.leerProducto;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  *

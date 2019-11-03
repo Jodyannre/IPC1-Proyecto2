@@ -46,6 +46,7 @@ public class vVerOferta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         tOfertas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -208,6 +209,9 @@ public class vVerOferta extends javax.swing.JFrame {
     Nodo auxiliar = new Nodo();
     Oferta oferta = new Oferta();
     
+    /**
+     * Rellena la tabla con todos los datos de ofertas existentes
+     */    
     private void rellenarTabla(){
         datos = new Dato();
         DefaultTableModel modelo = (DefaultTableModel) tOfertas.getModel();

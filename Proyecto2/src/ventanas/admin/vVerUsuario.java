@@ -8,7 +8,6 @@ package ventanas.admin;
 import clases.Cliente;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ventanas.vLogin;
@@ -46,6 +45,7 @@ public class vVerUsuario extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lUsuarios.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lUsuarios.setText("Usuarios");
@@ -216,6 +216,10 @@ public class vVerUsuario extends javax.swing.JFrame {
     Dato datos = new Dato();
     Nodo auxiliar = new Nodo();
     Cliente cliente = new Cliente();
+    
+    /**
+     * Rellena la tabla con todos los datos existentes
+     */    
     private void rellenarTabla(){
 //        datos = new Dato();
         DefaultTableModel modelo = (DefaultTableModel) tUsuarios.getModel();

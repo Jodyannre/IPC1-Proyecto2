@@ -52,6 +52,7 @@ public class vAgregarOferta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         tPrioridad.setBackground(new java.awt.Color(252, 249, 249));
         tPrioridad.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -325,6 +326,10 @@ public class vAgregarOferta extends javax.swing.JFrame {
     private Producto producto = new Producto();
     private float descuento;
     
+    
+    /**
+     * Valida productos que los productos a aplicarles una oferta existan
+     */    
     private boolean validarProductos(){
         descuento = Float.parseFloat(tPrecio.getText());
         boolean validar = false;
@@ -368,7 +373,10 @@ public class vAgregarOferta extends javax.swing.JFrame {
         }       
         return validar;
     }
-    
+
+    /**
+     * Agrega los productos existentes a la lista de la oferta a crear
+     */    
     private void agregarProductos(Oferta oferta){
         String m[]=tProductos.getText().split(",");
         int tamaño=m.length;

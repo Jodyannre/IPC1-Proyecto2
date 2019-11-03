@@ -22,93 +22,104 @@ public class Cliente extends Usuario {
         
     }
     
-    public void agregar(){
-        
-    }
-
-    @Override
+    /**
+     * Método heredado sin funcionalidad
+     */   
+    @Override 
     public void metodo() {
         }
 
     /**
-     * @return the nombreC
+     * Retorna el nombre del cliente
+     * @return el nombre del cliente
      */
     public String getNombreC() {
         return nombreC;
     }
 
     /**
-     * @param nombreC the nombreC to set
+     * Configura el nombre del cliente
+     * @param nombreC el nombre del cliente
      */
     public void setNombreC(String nombreC) {
         this.nombreC = nombreC;
     }
 
     /**
-     * @return the correo
+     * Retorna la dirección de correo del cliente
+     * @return el correo del usuario
      */
     public String getCorreo() {
         return correo;
     }
 
     /**
-     * @param correo the correo to set
+     * Configura la dirección de correo del cliente
+     * @param correo el correo del usuario
      */
     public void setCorreo(String correo) {
         this.correo = correo;
     }
 
     /**
-     * @return the tarjeta
+     * Retorna el número de tarjeta del cliente
+     * @return el número de tarjeta de crédito del cliente
      */
     public String getTarjeta() {
         return tarjeta;
     }
 
     /**
-     * @param tarjeta the tarjeta to set
+     * Configura el número de tarjeta del cliente
+     * @param tarjeta el número de tarjeta de crédito del cliente
      */
     public void setTarjeta(String tarjeta) {
         this.tarjeta = tarjeta;
     }
 
     /**
-     * @return the tipoC
+     * Retorna el tipo del cliente
+     * @return el tipo de cliente, normal o frecuente
      */
     public boolean isTipoC() {
         return tipoC;
     }
 
     /**
-     * @param tipoC the tipoC to set
+     * Configura el tipo del cliente
+     * @param tipoC el tipo de cliente, normal o frecuente
      */
     public void setTipoC(boolean tipoC) {
         this.tipoC = tipoC;
     }
 
     /**
-     * @return the contadorCompras
+     * Retorna el contador de compras del cliente
+     * @return el contador del total de compras del cliente
      */
     public int getContadorCompras() {
         return contadorCompras;
     }
 
     /**
-     * @param contadorCompras the contadorCompras to set
+     * Configura el contador de compras del cliente
+     * @param contadorCompras el contador del total de compras del cliente
      */
     public void setContadorCompras(int contadorCompras) {
         this.contadorCompras = contadorCompras;
     }
 
     /**
-     * @return the carrito
+     * Retorna el carrito único del cliente
+     * @return el carrito del cliente
      */
     public Carrito getCarrito() {
         return carrito;
     }
 
     /**
-     * @param carrito the carrito to set
+     * Configura el carrito único del cliente
+     * @param carrito el carrito propio de cada cliente
      */
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;

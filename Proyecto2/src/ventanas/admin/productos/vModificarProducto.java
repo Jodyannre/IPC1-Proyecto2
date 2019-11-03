@@ -10,8 +10,6 @@ import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import ventanas.admin.vProducto;
@@ -25,7 +23,7 @@ public class vModificarProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form vModificarProducto
-     * @param producto
+     * @param producto el producto a modificar
      */
     public vModificarProducto(Producto producto) {
         this.producto=producto;
@@ -69,6 +67,7 @@ public class vModificarProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lModificar.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lModificar.setText("Modificar producto");
@@ -352,6 +351,10 @@ public class vModificarProducto extends javax.swing.JFrame {
     Nodo auxiliar = new Nodo();
     Producto producto = new Producto();
     
+    
+    /**
+     * Rellena los cuadros de texto con la información del producto a modificar
+     */    
     private void rellenarInfo(){  
         try{
             tNombre.setText(producto.getNombre());

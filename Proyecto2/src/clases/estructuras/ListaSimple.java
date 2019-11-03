@@ -5,9 +5,6 @@
  */
 package clases.estructuras;
 
-import clases.Cliente;
-
-
 
 public class ListaSimple {
     private Nodo cabeza;
@@ -16,7 +13,12 @@ public class ListaSimple {
     public ListaSimple(){
         cabeza=null;
     }
-    
+
+
+    /**
+     * Agrega un objeto a la lista
+     * @param info el objeto a agregar en la lista
+     */    
     public void agregar(Object info){
         Nodo nuevo = new Nodo(info);
         if(getCabeza()==null){
@@ -30,7 +32,12 @@ public class ListaSimple {
         }
         tamaño++;
     }
-    
+
+
+    /**
+     * Elimina un objeto guardado en la lista
+     * @param info el objeto a eliminar de la lista
+     */    
     public void eliminar(Object info){
         if(getCabeza().getInfo().equals(info)){
             cabeza=getCabeza().getSiguiente();
@@ -44,7 +51,13 @@ public class ListaSimple {
             tamaño--;
         }
     }
+ 
     
+    /**
+     * Determina la existencia de un objeto dentro de la lista
+     * @param info el objeto a buscar dentro de la lista
+     * @return la existencia del objeto buscado
+     */    
     public boolean existe(Object info){
         boolean encontrado = false;
         Nodo auxiliar = getCabeza();
@@ -61,7 +74,13 @@ public class ListaSimple {
         
         return encontrado;
     }
-    
+
+
+    /**
+     * Busca un objeto dentro de la lista
+     * @param info el objeto a buscar en la lista
+     * @return el nodo que contiene la información solicitada
+     */    
     public Nodo buscar(Object info){
         Nodo auxiliar = getCabeza();
         Nodo vacio = new Nodo();
@@ -80,19 +99,24 @@ public class ListaSimple {
     }
 
     /**
-     * @return the cabeza
+     * Retorna el nodo cabeza
+     * @return el nodo cabeza
      */
     public Nodo getCabeza() {
         return cabeza;
     }
 
     /**
-     * @return the tamaño
+     * Retorna el tamaño de la lista
+     * @return el tamaño de la lista
      */
     public int getTamaño() {
         return tamaño;
     }
-    
+
+    /**
+     * Imprime toda la información guardada en la lista
+     */    
     public void mostrar(){
         Nodo auxiliar = cabeza;
         if(cabeza != null){

@@ -9,8 +9,6 @@ import clases.estructuras.Nodo;
 import clases.estructuras.Pila;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.JOptionPane;
 
 public class leerOferta {
@@ -39,6 +37,10 @@ public class leerOferta {
         productos = new ListaCircularSimple();
         prioridad=false;
     }
+    
+    /**
+     * Lee un archivo externo
+     */    
     public void leer(){
         try {
             FileReader entrada = new FileReader(url);
@@ -62,9 +64,14 @@ public class leerOferta {
 
     }
     
+    
+    /**
+     * Codifica el archivo de entrada que contiene las ofertas en texto
+     */    
     public void asignar(){
         Dato datos = new Dato();
         boolean validar =false;
+        int error = 0;
                 try{
                     for(int i=0; i<=numero;i++){
                         switch(contador2){
@@ -132,12 +139,17 @@ public class leerOferta {
                     }             
                 }catch(Exception e){
                     JOptionPane.showMessageDialog(null, "No se pudieron agregar algunas ofertas por error en el archivo de entrada", "Error en la creación de ofertas", JOptionPane.ERROR_MESSAGE);
+                    error = Integer.parseInt("hola");
                 }  
                 datos.getOfertas().mostrarCola();
 
 
     }
-    
+
+
+    /**
+     * Imprime los datos contenidos dentro de una oferta
+     */    
     public void imprimir(){
         try{
             System.out.print("\n");
@@ -154,6 +166,10 @@ public class leerOferta {
         }
 
     } 
+    
+    /**
+     * Determina la prioridad de la oferta
+     */    
     private void castPrioridad(){
         if(prioridadT.equalsIgnoreCase("alta")){
             prioridad = true;
@@ -161,7 +177,11 @@ public class leerOferta {
             prioridad = false;
         }
     }
-    
+
+
+    /**
+     * Agrega las productos a la oferta creada
+     */    
     private void agregarProductos(){
         Dato dato = new Dato();
         int vueltas = 0;

@@ -8,32 +8,39 @@ public abstract class Usuario {
     
 
     /**
-     * @return the nombreU
+     * Retorna el nombre del usuario
+     * @return el nombre del usuario
      */
     public String getNombreU() {
         return nombreU;
     }
 
     /**
-     * @param nombreU the nombreU to set
+     * Configura el nombre del usuario
+     * @param nombreU el nombre del usuario
      */
     public void setNombreU(String nombreU) {
         this.nombreU = nombreU;
     }
 
     /**
-     * @return the pass
+     * Retorna la contraseña del usuario
+     * @return la contraseña del usuario
      */
     public String getPass() {
         return pass;
     }
 
     /**
-     * @param pass the pass to set
+     * Configura la contraseña del usuario
+     * @param pass la contraseña del usuario
      */
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
+
+    /**
+     * Método abstracto sin funcionalidad
+     */    
     public abstract void metodo();
 }

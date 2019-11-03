@@ -8,9 +8,7 @@ package ventanas.usuario;
 import clases.Cliente;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
-import java.util.HashSet;
 import javax.swing.JOptionPane;
-import ventanas.vLogin;
 
 /**
  *
@@ -20,8 +18,8 @@ public class vModificarPerfil extends javax.swing.JFrame {
 
     /**
      * Creates new form vModificarPerfil
-     * @param usuario
-     * @param cliente
+     * @param usuario el nombre del usuario
+     * @param cliente el cliente logueado
      */
     public vModificarPerfil(String usuario, Cliente cliente) {
         this.usuario=usuario;
@@ -318,7 +316,11 @@ public class vModificarPerfil extends javax.swing.JFrame {
     private Nodo auxiliar = new Nodo();
     private Dato dato = new Dato();
     private Cliente cliente = new Cliente();
-    
+
+
+    /**
+     * Carga todos los datos del usuario a modificar
+     */    
     private void cargarDatos(){      
         tUsuario.setText(cliente.getNombreU());
         tNombre.setText(cliente.getNombreC());

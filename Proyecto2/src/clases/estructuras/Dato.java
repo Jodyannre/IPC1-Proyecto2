@@ -8,21 +8,24 @@ public class Dato {
     private static final ColaPrioridad ofertas = new ColaPrioridad();
 
     /**
-     * @return the usuarios
+     * Retorna la lista simple de usuario
+     * @return la lista simple de usuarios
      */
     public ListaSimple getUsuarios() {
         return usuarios;
     }
 
     /**
-     * @return the productos
+     * Retorna la lista circular simple de productos
+     * @return la lista circular simple de productos
      */
     public ListaCircularSimple getProductos() {
         return productos;
     }
 
     /**
-     * @return the ofertas
+     * Retorna la cola de prioridad de las ofertas
+     * @return la cola de prioridad de las ofertas
      */
     public ColaPrioridad getOfertas() {
         return ofertas;

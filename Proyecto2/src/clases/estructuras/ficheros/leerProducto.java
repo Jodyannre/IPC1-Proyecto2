@@ -5,11 +5,6 @@ import clases.Producto;
 import clases.estructuras.Dato;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
-
-
 
 public class leerProducto{
     String url,nombre,descripcion,direccion,precioT,existenciaT;
@@ -34,6 +29,10 @@ public class leerProducto{
         direccion="";
         descripcion="";
     }
+    
+    /**
+     * Lee un archivo externo válido para cargar productos 
+     */    
     public void leer(){
         try {
             FileReader entrada = new FileReader(url);
@@ -56,7 +55,10 @@ public class leerProducto{
         System.out.println(matriz[69]);
 
     }
-    
+
+    /**
+     * Crea los productos declarados en el archivo externo
+     */    
     public void asignar(){
         Dato datos = new Dato();
         boolean validar =false;
@@ -134,7 +136,11 @@ public class leerProducto{
 
 
     }
+ 
     
+    /**
+     * Imprime los datos del producto
+    */
     public void imprimir(){
         try{
             System.out.print("\n");

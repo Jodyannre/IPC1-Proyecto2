@@ -9,7 +9,9 @@ public class Admin extends Usuario {
         this.pass = String.valueOf(pass);
     }
 
-    
+    /**
+     * Método heredado sin funcionalidad
+     */
     @Override
     public void metodo() {
         }

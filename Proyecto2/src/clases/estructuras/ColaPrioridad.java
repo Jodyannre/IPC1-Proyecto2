@@ -6,17 +6,28 @@ public class ColaPrioridad {
     private Nodo inicio, fin;
     private int tamaño;
     private int prioridad;
-    
+
+
     public ColaPrioridad(){
         inicio=null;
         fin = null;
     }
+    
+    /**
+     * Retorna un booleano que indica el estado de la lista, ya sea vacia o no
+     * @return si la cola esta vacía
+     */    
     public boolean estaVacia(){
         return getInicio()==null;
     }
     
     //Prioridades
     //1--Máxima prioridad y 2 mínima prioridad  
+    /**
+     * Método que agrega un objeto dentro de la cola
+     * @param info el objeto a agregar en la cola
+     * @param prioridad la prioridad que contiene el objeto a agregar en la cola
+     */    
     public void agregar(Object info, boolean prioridad){
         Nodo nuevo = new Nodo(info);
         if(estaVacia()){
@@ -33,7 +44,10 @@ public class ColaPrioridad {
         tamaño++;
     }    
   
-    
+    /**
+     * Método que retorna el último elemento agregado en la cola
+     * @return el nodo inicial de la cola
+     */    
     public Nodo sacarCola(){
         if(getInicio()!=null){
             Nodo auxiliar = getInicio();
@@ -46,7 +60,11 @@ public class ColaPrioridad {
         }
 
     }
-    
+
+
+    /**
+     * Método que imprime la información de todos los nodos en la cola
+     */    
     public void mostrarCola(){
         Nodo auxiliar = getInicio();
         while(auxiliar!=null){
@@ -54,15 +72,31 @@ public class ColaPrioridad {
             auxiliar=auxiliar.getSiguiente();    
         }
     }
-    
+
+
+    /**
+     * Retorna el nodo incial
+     * @return el nodo inicial
+     */    
     public Object inicio(){
         return getInicio().getInfo();
     }
     
+    
+    /**
+     * Retorna el tamaño de la cola
+     * @return el tamaño de la cola
+     */    
     public int tamaño(){
         return getTamaño();
     }
     
+    
+    /**
+     * Método que evalua la existencia del objeto dentro de la cola
+     * @param info el objeto a evaluar
+     * @return si el objeto existe dentro de la cola
+     */    
     public boolean existe(Object info){
         Nodo auxiliar=getInicio();
         boolean encontrado = false;
@@ -80,6 +114,12 @@ public class ColaPrioridad {
         
         return encontrado;
     }
+
+
+    /**
+     *  Método que elimina un nodo
+     * @param info el objeto a guardar en la cola
+     */
     
     public void eliminar(Object info){
         Nodo auxiliar=getInicio();
@@ -109,28 +149,32 @@ public class ColaPrioridad {
     }
 
     /**
-     * @return the inicio
+     * Retorna el nodo inicial
+     * @return el nodo inicial
      */
     public Nodo getInicio() {
         return inicio;
     }
 
     /**
-     * @return the fin
+     * Retorna el nodo final
+     * @return el nodo final
      */
     public Nodo getFin() {
         return fin;
     }
 
     /**
-     * @return the tamaño
+     * Retorna el tamaño de la cola
+     * @return el tamaño de la cola
      */
     public int getTamaño() {
         return tamaño;
     }
 
     /**
-     * @return the prioridad
+     * Retorna la prioridad del nodo
+     * @return la prioridad del nodo
      */
     public int getPrioridad() {
         return prioridad;

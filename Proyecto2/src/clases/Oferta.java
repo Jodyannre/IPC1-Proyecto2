@@ -25,21 +25,24 @@ public class Oferta {
     }
     
     /**
-     * @return the descripcion
+     * Retorna la descrición de la oferta
+     * @return la descripción de la oferta
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @return the descuento
+     * Retorna el descuento de la oferta
+     * @return el descuento de la oferta
      */
     public float getDescuento() {
         return descuento;
     }
 
     /**
-     * @return the productos
+     * Retorna la lista de productos que contienen la oferta
+     * @return la lista con los productos que tiene la ferta
      */
     public ListaCircularSimple getProductos() {
         return productos;
@@ -53,26 +56,33 @@ public class Oferta {
     }
 
     /**
-     * @return the prioridad
+     * Retorna la prioridad de la oferta en un booleano
+     * @return la prioridad de la oferta
      */
     public boolean isPrioridad() {
         return prioridad;
     }
 
     /**
-     * @param prioridad the prioridad to set
+     * Configura la prioridad de la oferta con un booleano
+     * @param prioridad la prioridad de la oferta
      */
     public void setPrioridad(boolean prioridad) {
         this.prioridad = prioridad;
     }
-    
+
+
+    /**
+     * Genera el id de cada oferta creada
+     */    
     private void generarId(){
         id = "ofer"+contador;
         contador++;
     }
 
     /**
-     * @return the id
+     * Retorna el id de la oferta creada
+     * @return el id de la oferta creada
      */
     public String getId() {
         return id;

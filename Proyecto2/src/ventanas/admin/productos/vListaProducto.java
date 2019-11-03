@@ -46,6 +46,7 @@ public class vListaProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Productos disponibles");
@@ -215,6 +216,10 @@ public class vListaProducto extends javax.swing.JFrame {
     Nodo auxiliar = new Nodo();
     Producto producto = new Producto();
     
+    
+    /**
+     * Rellena la tabla con todos los datos de los productos existentes
+     */    
     private void rellenarTabla(){
         datos = new Dato();
         DefaultTableModel modelo = (DefaultTableModel) tProductos.getModel();

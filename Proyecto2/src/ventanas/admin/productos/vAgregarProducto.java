@@ -7,10 +7,8 @@ package ventanas.admin.productos;
 
 import clases.Producto;
 import clases.estructuras.Dato;
+import clases.estructuras.Nodo;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import ventanas.admin.vProducto;
@@ -58,6 +56,7 @@ public class vAgregarProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lNombre.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         lNombre.setText("Nombre: ");
@@ -253,8 +252,14 @@ public class vAgregarProducto extends javax.swing.JFrame {
          ||"".equals(tExistencia.getText())
          ||"".equals(tPrecio.getText())
          ||"".equals(tImagen.getText())
-         ||" ".equals(tImagen.getText())){
-            JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);
+         ||" ".equals(tImagen.getText())
+         ||validarRepetido()){
+            if(validarRepetido()){
+                JOptionPane.showMessageDialog(null, "El producto ya existe", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);    
+            }else{
+                JOptionPane.showMessageDialog(null, "Error, rellene todos los campos solicitados", "Error en el ingreso de datos", JOptionPane.ERROR_MESSAGE);    
+            }
+            
         }else{
             String nombre = tNombre.getText();
             String descripcion = tDescripcion.getText();
@@ -382,4 +387,33 @@ public class vAgregarProducto extends javax.swing.JFrame {
     private javax.swing.JTextField tNombre;
     private javax.swing.JTextField tPrecio;
     // End of variables declaration//GEN-END:variables
+    private Dato datos = new Dato();
+    private Nodo auxiliar = new Nodo();
+    private Producto producto = new Producto();
+
+    
+    /**
+     * Valida si el producto a agregar ya existe dentro de la base de datos de productos creados
+     */    
+    private boolean validarRepetido(){
+        boolean validar=false;
+        try{
+
+            auxiliar = datos.getProductos().getPrimero();
+            producto = (Producto)auxiliar.getInfo();
+            for(int i=0; i<datos.getProductos().getTamaño();i++){
+                if(producto.getNombre().equalsIgnoreCase(tNombre.getText())){
+                    validar=true; 
+                    break;
+                } 
+                auxiliar = auxiliar.getSiguiente();
+                producto = (Producto)auxiliar.getInfo();
+            }
+            
+        }catch(Exception e){
+            
+        }
+        return validar;
+    }
+
 }

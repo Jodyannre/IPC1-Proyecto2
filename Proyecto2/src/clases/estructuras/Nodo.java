@@ -16,52 +16,54 @@ public final class Nodo {
         setInfo(info);
     }
     
-//    public Nodo(Object info, int prioridad){
-//        setSiguiente(null);
-//        setInfo(info); 
-//        setPrioridad(prioridad);
-//    }
+
     public Nodo(){
        
     }    
 
     /**
-     * @return the info
+     * Retorna el objeto a guardar dentro del nodo
+     * @return el objeto a guardar dentro del nodo
      */
     public Object getInfo() {
         return info;
     }
 
     /**
-     * @param info the info to set
+     * Configura el objeto a guardar dentro del nodo
+     * @param info el objeto a guardar dentro del nodo
      */
     public void setInfo(Object info) {
         this.info = info;
     }
 
     /**
-     * @return the siguiente
+     * Retorna el nodo siguiente
+     * @return el nodo siguiente
      */
     public Nodo getSiguiente() {
         return siguiente;
     }
 
     /**
-     * @param siguiente the siguiente to set
+     * Configura el nodo siguiente
+     * @param siguiente el nodo siguiente
      */
     public void setSiguiente(Nodo siguiente) {
         this.siguiente = siguiente;
     }
 
     /**
-     * @return the prioridad
+     * Retorna la prioridad del nodo
+     * @return la prioridad del nodo
      */
     public int getPrioridad() {
         return prioridad;
     }
 
     /**
-     * @param prioridad the prioridad to set
+     * Configura la prioridad del nodo
+     * @param prioridad la prioridad del nodo
      */
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;

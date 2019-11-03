@@ -10,8 +10,6 @@ import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
 import clases.estructuras.ficheros.leerProducto;
 import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import ventanas.admin.productos.vVerProducto;
 import ventanas.admin.productos.vAgregarProducto;
@@ -57,6 +55,7 @@ public class vProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lProductos.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lProductos.setText("Productos");

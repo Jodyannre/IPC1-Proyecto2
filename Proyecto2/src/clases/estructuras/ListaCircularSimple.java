@@ -6,8 +6,6 @@
 package clases.estructuras;
 
 import clases.Producto;
-import java.util.HashSet;
-import java.util.Set;
 
 public class ListaCircularSimple {
     private Nodo primero;
@@ -20,7 +18,7 @@ public class ListaCircularSimple {
     }
 
     /**
-    * Agrega un nuevo nodo
+     * Agrega un nuevo nodo
      * @param info la información que contendrá el nodo a crear
     */    
     public void agregar(Object info){
@@ -39,8 +37,8 @@ public class ListaCircularSimple {
     }
 
     /**
-    * Imprime la información dentro de todos los nodos
-     * @return 
+     * Imprime la información dentro de todos los nodos
+     * @return un string que contiene toda la información de los productos agregados
     */    
     public String mostrar(){
         Nodo auxiliar= getPrimero();
@@ -60,7 +58,7 @@ public class ListaCircularSimple {
     }
 
     /**
-    * Método que retorna el nodo buscado.
+     * Método que retorna el nodo buscado.
      * @param info información del nodo a buscar
      * @return el nodo buscado
     */    
@@ -89,7 +87,7 @@ public class ListaCircularSimple {
     }
     
     /**
-    * Este método modifica la información dentro de un nodo.
+     * Este método modifica la información dentro de un nodo.
      * @param info la información del nodo actual
      * @param nueva la nueva información que tendrá el nodo
     */    
@@ -107,7 +105,7 @@ public class ListaCircularSimple {
     }
     
     /**
-    * Este método determinar si existe el producto ingresado.
+     * Este método determinar si existe el producto ingresado.
      * @param info la información guardada en el nodo
      * @return un booleano que determina la existencia del nodo
     */
@@ -132,7 +130,7 @@ public class ListaCircularSimple {
     
 
     /**
-    * Determina si la lista esta vacia.
+     * Determina si la lista esta vacia.
      * @return un booleano que determina si la lista esta vacia
     */    
     public boolean estaVacia(){
@@ -168,6 +166,7 @@ public class ListaCircularSimple {
     }
 
     /**
+     * Retorna el tamaño de la lista
      * @return el tamaño de la lista
      */
     public int getTamaño() {
@@ -175,14 +174,16 @@ public class ListaCircularSimple {
     }
 
     /**
-     * @return the primero
+     * Retorna el primer nodo de la lista
+     * @return el primer nodo de la lista
      */
     public Nodo getPrimero() {
         return primero;
     }
 
     /**
-     * @return the ultimo
+     * Retorna el último nodo de la lista
+     * @return el último nodo de la lista
      */
     public Nodo getUltimo() {
         return ultimo;

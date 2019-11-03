@@ -13,7 +13,6 @@ import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import ventanas.admin.ofertas.vAgregarOferta;
-import ventanas.admin.ofertas.vListaOferta;
 import ventanas.admin.ofertas.vVerOferta;
 import ventanas.vLogin;
 
@@ -50,6 +49,7 @@ public class vOferta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lSalir.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lSalir.setText("Ofertas");
@@ -178,13 +178,19 @@ public class vOferta extends javax.swing.JFrame {
                     this.dispose();                    
                     break;
                 case 2:
+                    boolean validar = true;
                     JFileChooser ingreso = new JFileChooser();
                     ingreso.showOpenDialog(this);
                     File ruta = ingreso.getSelectedFile();
                     leerOferta leer = new leerOferta(ruta.toString());
                     leer.leer();
-                    leer.asignar(); 
-                    JOptionPane.showMessageDialog(null, "Ofertas agregadas correctamente","Creación exitosa",JOptionPane.INFORMATION_MESSAGE);
+                    try{
+                        leer.asignar();                         
+                    }catch(Exception e){
+                        validar = false;
+                    }
+                    
+                    if(validar)JOptionPane.showMessageDialog(null, "Ofertas agregadas correctamente","Creación exitosa",JOptionPane.INFORMATION_MESSAGE);
                     break;
                 default:
                     JOptionPane.showMessageDialog(null, "Error, opción no disponible","Error",JOptionPane.ERROR_MESSAGE);                    

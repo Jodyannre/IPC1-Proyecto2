@@ -41,6 +41,7 @@ public class vListaOferta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Ofertas disponibles");

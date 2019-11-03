@@ -262,7 +262,10 @@ public class vLogin extends javax.swing.JFrame {
     char contraseña[] = "admin".toCharArray();   
     Admin admin = new Admin("admin",contraseña);
     
-        
+ 
+    /**
+     * Comprueba que los datos ingresados existan y sean correctos
+    */
     private boolean comprobarDatos(){
         boolean validar = false;
         try{            

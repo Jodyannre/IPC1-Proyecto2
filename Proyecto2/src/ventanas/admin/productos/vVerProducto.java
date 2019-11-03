@@ -8,11 +8,7 @@ package ventanas.admin.productos;
 import clases.Producto;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
-import java.awt.Image;
-import java.net.URL;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import ventanas.admin.vProducto;
@@ -51,6 +47,7 @@ public class vVerProducto extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administrador");
+        setResizable(false);
 
         lDisponibles.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lDisponibles.setText("Productos disponibles");
@@ -215,7 +212,11 @@ public class vVerProducto extends javax.swing.JFrame {
     Dato datos = new Dato();
     Nodo auxiliar = new Nodo();
     Producto producto = new Producto();
-    
+
+
+    /**
+     * Rellena la tabla con todos los datos de los productos existentes
+     */    
     private void rellenarTabla(){
         datos = new Dato();
         DefaultTableModel modelo = (DefaultTableModel) tProductos.getModel();

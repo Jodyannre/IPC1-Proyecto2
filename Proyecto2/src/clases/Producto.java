@@ -24,111 +24,128 @@ public class Producto {
     }
 
     /**
-     * @return the id
+     * Retorna el id del producto
+     * @return el Id del producto
      */
     public String getId() {
         return id;
     }
 
-
+    /**
+     * Método que genera el id de cada producto creado
+     */
     private void setId() {
        this.id = "prod"+contador;
        contador++;
     }
 
     /**
-     * @return the nombre
+     * Retorna el nombre del producto
+     * @return el nombre del producto
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * Configura el nombre del producto
+     * @param nombre el nombre del producto
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * @return the descripcion
+     * Retorna la descripción del producto
+     * @return la descripción del producto
      */
     public String getDescripcion() {
         return descripcion;
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * Configura la descripción del producto
+     * @param descripcion la descripción del producto
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * @return the imagen
+     * Retorna la dirección de la imagen del producto
+     * @return la dirección de la imagen del producto
      */
     public String getImagen() {
         return imagen;
     }
 
     /**
-     * @param imagen the imagen to set
+     * Configura la dirección de la imagen del producto
+     * @param imagen la dirección de la imagen del producto
      */
     public void setImagen(String imagen) {
         this.imagen = imagen;
     }
 
     /**
-     * @return the precio
+     * Retorna el precio del producto
+     * @return el precio del producto
      */
     public float getPrecio() {
         return precio;
     }
 
     /**
-     * @param precio the precio to set
+     * Configura el precio del producto
+     * @param precio el precio del producto
      */
     public void setPrecio(float precio) {
         this.precio = precio;
     }
 
     /**
-     * @return the descuento
+     * Retorna el descuento aplicado al producto
+     * @return el descuento apliado al producto
      */
     public float getPrecioAnterior() {
         return precioAnterior;
     }
 
     /**
-     * @param descuento the descuento to set
+     * Configura el descuento aplicado al producto
+     * @param descuento el descuento aplicado al producto
      */
     public void setPrecioAnterior(float descuento) {
         this.precioAnterior = descuento;
     }
 
     /**
-     * @return the existencia
+     * Retorna el total de productos en existencia
+     * @return el total de productos en existencia
      */
     public int getExistencia() {
         return existencia;
     }
 
     /**
-     * @param existencia the existencia to set
+     * Configura el total de productos en existencia
+     * @param existencia el total de productos en existencia
      */
     public void setExistencia(int existencia) {
         this.existencia = existencia;
     }
 
     /**
-     * @return the prioridad
+     * Retorna la prioridad del producto
+     * @return la prioridad del producto
      */
     public boolean isPrioridad() {
         return prioridad;
     }
 
     /**
-     * @param prioridad the prioridad to set
+     * Configura la prioridad del producto
+     * @param prioridad la prioridad del producto
      */
     public void setPrioridad(boolean prioridad) {
         this.prioridad = prioridad;

@@ -50,6 +50,7 @@ public class vNuevo extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Crear nueva cuenta");
+        setResizable(false);
 
         lCrear.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lCrear.setText("Crear nuevo usuario");
@@ -324,7 +325,10 @@ public class vNuevo extends javax.swing.JFrame {
     Dato dato = new Dato();
     Cliente cliente = new Cliente();
     
-    
+
+    /**
+     * Comprueba que los datos ingresados sean correctos 
+     */    
     private boolean comprobar(String usuario){
         boolean validar = false;
         try{

@@ -11,10 +11,7 @@ import clases.Producto;
 import clases.estructuras.Dato;
 import clases.estructuras.Nodo;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -34,8 +31,8 @@ public class vInicio extends javax.swing.JFrame {
 
     /**
      * Creates new form vInicio
-     * @param usuario
-     * @param cliente
+     * @param usuario el nombre del usuario
+     * @param cliente el cliente logueado
      */
     public vInicio(String usuario, Cliente cliente) {
         this.usuario=usuario;  
@@ -78,6 +75,7 @@ public class vInicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Inicio");
+        setResizable(false);
 
         lBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lBienvenida.setText("Hola usuario");
@@ -279,7 +277,11 @@ public class vInicio extends javax.swing.JFrame {
     Dato dato = new Dato();
     Oferta oferta = new Oferta();
     Producto producto = new Producto();
-    
+
+
+    /**
+     * Dibuja paneles que contienen toda la información de las ofertas existentes
+     */    
     private void dibujarProductos(String nombre, String precio, String anterior,String i){
         JPanel panelPrincipal = new JPanel();
         JPanel panelImagen = new JPanel();
@@ -301,6 +303,7 @@ public class vInicio extends javax.swing.JFrame {
         imagen.setAlignmentX(CENTER_ALIGNMENT);
         boton.setAlignmentX(CENTER_ALIGNMENT); 
         area.setAlignmentX(CENTER_ALIGNMENT);
+        area.setEditable(false);
         boton.setSize(73, 23);   
         area.setBackground(new Color(0,0,0,0));
         area.setBorder(BorderFactory.createEmptyBorder());
@@ -313,7 +316,11 @@ public class vInicio extends javax.swing.JFrame {
         panelPrincipal.setBorder(new CompoundBorder(border, margin));        
         pOfertas.add(panelPrincipal); 
     }
-    
+
+
+    /**
+     * Agrega todas las oferta existentes al componente padre
+     */    
     private void agregarProductos(){
         auxiliar = dato.getOfertas().getInicio();
         oferta = (Oferta) auxiliar.getInfo();
@@ -321,7 +328,7 @@ public class vInicio extends javax.swing.JFrame {
         producto = (Producto) auxiliar2.getInfo();
         for(int i=0; i<dato.getOfertas().getTamaño();i++){
             for(int j=0;j<oferta.getProductos().getTamaño();j++){
-                dibujarProductos(producto.getNombre(),String.valueOf(producto.getPrecio()),String.valueOf(producto.getPrecioAnterior()),producto.getImagen());
+                dibujarProductos(producto.getNombre(),String.valueOf(Math.round(producto.getPrecio()*100)/100d),String.valueOf(producto.getPrecioAnterior()),producto.getImagen());
                 auxiliar2= auxiliar2.getSiguiente();
                 producto = (Producto) auxiliar2.getInfo(); 
             } 

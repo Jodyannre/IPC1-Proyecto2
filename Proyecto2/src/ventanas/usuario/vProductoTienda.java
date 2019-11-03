@@ -32,8 +32,8 @@ public class vProductoTienda extends javax.swing.JFrame {
 
     /**
      * Creates new form vProductosTienda
-     * @param usuario
-     * @param cliente
+     * @param usuario el nombre del usuario
+     * @param cliente el cliente logueado
      */
     public vProductoTienda(String usuario, Cliente cliente) {
         this.usuario=usuario;
@@ -71,6 +71,7 @@ public class vProductoTienda extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Productos");
         setPreferredSize(new java.awt.Dimension(893, 720));
+        setResizable(false);
 
         lBienvenida.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lBienvenida.setText("Hola usuario");
@@ -246,7 +247,9 @@ public class vProductoTienda extends javax.swing.JFrame {
     Producto producto2 = new Producto();
     ListaCircularSimple productosRepetidos = new ListaCircularSimple();
     
-    
+    /**
+     * Dibuja los paneles que contienen toda la información de las ofertas existentes
+     */    
     private void dibujarProductos(String nombre, String precio, String anterior,String i){
         JPanel panelPrincipal = new JPanel();
         JPanel panelImagen = new JPanel();
@@ -272,6 +275,7 @@ public class vProductoTienda extends javax.swing.JFrame {
         area.setBackground(new Color(0,0,0,0));
         area.setBorder(BorderFactory.createEmptyBorder());
         area.setLineWrap(true);
+        area.setEditable(false);        
         panelPrincipal.add(panelImagen);
         panelPrincipal.add(area);
         panelPrincipal.add(boton); 
@@ -280,7 +284,11 @@ public class vProductoTienda extends javax.swing.JFrame {
         panelPrincipal.setBorder(new CompoundBorder(border, margin));        
         pOfertas.add(panelPrincipal); 
     }
+ 
     
+    /**
+     * Agrega los paneles creados con la información de todas las ofertas al componente padre
+     */    
     private void dibujarProductos(String nombre, String precio, String i){
 
         JPanel panelPrincipal = new JPanel();
@@ -315,7 +323,11 @@ public class vProductoTienda extends javax.swing.JFrame {
         panelPrincipal.setBorder(new CompoundBorder(border, margin));        
         pOfertas.add(panelPrincipal);           
     }
-    
+
+
+    /**
+     * Agrega los productos sin ofertas al componente padre
+     */    
     private void agregarProductos(){
         boolean repetido=false;
         
@@ -339,7 +351,7 @@ public class vProductoTienda extends javax.swing.JFrame {
             for(int i=0; i<dato.getOfertas().getTamaño();i++){
 
                 for(int j=0;j<oferta.getProductos().getTamaño();j++){
-                    dibujarProductos(producto.getNombre(),String.valueOf(producto.getPrecio()),String.valueOf
+                    dibujarProductos(producto.getNombre(),String.valueOf(Math.round(producto.getPrecio()*100)/100d),String.valueOf
                     (producto.getPrecioAnterior()),producto.getImagen());
                     productosRepetidos.agregar(producto);
                     auxiliar2= auxiliar2.getSiguiente();
